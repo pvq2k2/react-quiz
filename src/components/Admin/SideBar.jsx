@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import "react-pro-sidebar/dist/css/styles.css";
 import {
   ProSidebar,
@@ -18,6 +19,11 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
+
+import { DiReact } from "react-icons/di";
+import { MdDashboard } from "react-icons/md";
+
+import "./SideBar.scss";
 
 const SideBar = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
@@ -43,28 +49,20 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            Admin
+            <DiReact size={"3em"} color={"00bfff"} />
+            <span>Admin</span>
           </div>
         </SidebarHeader>
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
-            >
-              dashboard
-            </MenuItem>
-            <MenuItem icon={<FaGem />}> components </MenuItem>
+            <MenuItem icon={<MdDashboard />}>Dashboard</MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
-            >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+            <SubMenu icon={<FaGem />} title="Features">
+              <MenuItem> Quản lý Users</MenuItem>
+              <MenuItem> Quản lý Bài Quiz</MenuItem>
+              <MenuItem> Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
@@ -76,13 +74,7 @@ const SideBar = (props) => {
               padding: "20px 24px",
             }}
           >
-            <a
-              href="https://github.com/azouaoui-med/react-pro-sidebar"
-              target="_blank"
-              className="sidebar-btn"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
+            <a href="#" className="sidebar-btn" rel="noopener noreferrer">
               <span
                 style={{
                   whiteSpace: "nowrap",
@@ -90,7 +82,7 @@ const SideBar = (props) => {
                   overflow: "hidden",
                 }}
               >
-                viewSource
+                &#169; Admin
               </span>
             </a>
           </div>
