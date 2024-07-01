@@ -25,13 +25,17 @@ const Header = () => {
             </NavLink>
           </Nav>
           <Nav>
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
+            <div className="d-flex gap-3">
+              <button className="btn btn-outline-dark">Login</button>
+              <button className="btn btn-dark">Sign up</button>
+            </div>
+            {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Login</NavDropdown.Item>
               <NavDropdown.Item>Register</NavDropdown.Item>
               <NavDropdown.Item>Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>Logout</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

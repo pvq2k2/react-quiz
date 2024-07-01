@@ -10,17 +10,33 @@ body {
 
 .app-container {
   .header-container {
-    .navbar-brand {
+    .navbar {
       z-index: 10;
-    }
-    .navbar-nav {
-      z-index: 10;
+      padding-top: 15px;
       .nav-link {
         &.active {
           color: blue;
         }
       }
     }
+  }
+  .homepage-container {
+    .home-title{
+      position: relative;
+      margin-top: 13%;
+      left: 0;
+      width: 50%;
+      z-index: 10;
+      h1 {
+        font-size: 60px;
+      }
+      p {
+        font-size: 20px;
+        width: 80%;
+        padding: 20px 0;
+      }
+    }
+    
   }
 }
 
