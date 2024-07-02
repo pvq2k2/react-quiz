@@ -1,4 +1,3 @@
-import React from "react";
 import videoHomepage from "../../assets/video-homepage.mp4";
 const HomePage = () => {
   return (
