@@ -1,12 +1,20 @@
+import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
-const ModalCreateUser = () => {
-  const [show, setShow] = useState(false);
+const ModalCreateUser = (props) => {
+  const { show, setShow } = props;
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setRole("USER");
+    setImage("");
+    setPreviewImage("");
+  };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,12 +29,22 @@ const ModalCreateUser = () => {
       setImage(e.target.files[0]);
     }
   };
+  const handleSubmitCreateUser = async () => {
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+    console.log(res);
+  };
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add new users
-      </Button>
-
       <Modal
         show={show}
         size="xl"
@@ -115,7 +133,7 @@ const ModalCreateUser = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save Changes
           </Button>
         </Modal.Footer>
