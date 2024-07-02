@@ -3,8 +3,11 @@ import "./ManageUser.scss";
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiService";
 import TableUser from "./TableUser";
+import ModalUpdateUser from "./ModalUpdateUser";
 const ManageUser = () => {
   const [showModalAddNewUser, setShowModalAddNewUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
   const [listUser, setListUser] = useState([]);
   useEffect(() => {
     fetchGetAllUsers();
@@ -16,6 +19,11 @@ const ManageUser = () => {
     if (res.EC === 0) {
       setListUser(res.DT);
     }
+  };
+
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpdate(user);
   };
   return (
     <div className="manage-user-container">
@@ -30,11 +38,20 @@ const ManageUser = () => {
           </button>
         </div>
         <div className="table-users-container">
-          <TableUser listUser={listUser} />
+          <TableUser
+            listUser={listUser}
+            handleClickBtnUpdate={handleClickBtnUpdate}
+          />
         </div>
         <ModalCreateUser
           show={showModalAddNewUser}
           setShow={setShowModalAddNewUser}
+          fetchGetAllUsers={fetchGetAllUsers}
+        />
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
+          dataUpdate={dataUpdate}
           fetchGetAllUsers={fetchGetAllUsers}
         />
       </div>
