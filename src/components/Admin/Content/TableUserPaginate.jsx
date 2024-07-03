@@ -8,9 +8,12 @@ const TableUserPaginate = (props) => {
     handleClickBtnDelete,
     fetchGetAllUsersWithPaginate,
     pageCount,
+    currentPage,
+    setCurrentPage,
   } = props;
 
   const handlePageClick = (event) => {
+    setCurrentPage(+event.selected + 1);
     fetchGetAllUsersWithPaginate(+event.selected + 1);
   };
 
@@ -85,6 +88,7 @@ const TableUserPaginate = (props) => {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={currentPage - 1}
         />
       </div>
     </>

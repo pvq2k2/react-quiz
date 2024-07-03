@@ -1,10 +1,7 @@
 import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import React, { useEffect, useState } from "react";
-import {
-  getAllUsers,
-  getAllUsersWithPaginate,
-} from "../../../services/apiService";
+import { getAllUsersWithPaginate } from "../../../services/apiService";
 // import TableUser from "./TableUser";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
@@ -13,6 +10,7 @@ import TableUserPaginate from "./TableUserPaginate";
 const ManageUser = () => {
   const LIMIT_USER = 5;
   const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [showModalAddNewUser, setShowModalAddNewUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
@@ -26,13 +24,13 @@ const ManageUser = () => {
     fetchGetAllUsersWithPaginate(1);
   }, []);
 
-  const fetchGetAllUsers = async () => {
-    const res = await getAllUsers();
+  // const fetchGetAllUsers = async () => {
+  //   const res = await getAllUsers();
 
-    if (res.EC === 0) {
-      setListUser(res.DT);
-    }
-  };
+  //   if (res.EC === 0) {
+  //     setListUser(res.DT);
+  //   }
+  // };
 
   const fetchGetAllUsersWithPaginate = async (page) => {
     const res = await getAllUsersWithPaginate(page, LIMIT_USER);
@@ -81,19 +79,23 @@ const ManageUser = () => {
             handleClickBtnDelete={handleClickBtnDelete}
             fetchGetAllUsersWithPaginate={fetchGetAllUsersWithPaginate}
             pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
         </div>
         <ModalCreateUser
           show={showModalAddNewUser}
           setShow={setShowModalAddNewUser}
-          fetchGetAllUsers={fetchGetAllUsers}
+          fetchGetAllUsersWithPaginate={fetchGetAllUsersWithPaginate}
+          setCurrentPage={setCurrentPage}
         />
         <ModalUpdateUser
           show={showModalUpdateUser}
           setShow={setShowModalUpdateUser}
           dataUpdate={dataUpdate}
           setDataUpdate={setDataUpdate}
-          fetchGetAllUsers={fetchGetAllUsers}
+          fetchGetAllUsersWithPaginate={fetchGetAllUsersWithPaginate}
+          currentPage={currentPage}
         />
         <ModalViewUser
           show={showModalViewUser}
@@ -106,7 +108,8 @@ const ManageUser = () => {
           setShow={setShowModalDeleteUser}
           dataDelete={dataDelete}
           setDataDelete={setDataDelete}
-          fetchGetAllUsers={fetchGetAllUsers}
+          fetchGetAllUsersWithPaginate={fetchGetAllUsersWithPaginate}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </div>

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import "react-pro-sidebar/dist/css/styles.css";
 import {
   ProSidebar,
@@ -74,7 +73,7 @@ const SideBar = (props) => {
               padding: "20px 24px",
             }}
           >
-            <a href="#" className="sidebar-btn" rel="noopener noreferrer">
+            <Link to="/" className="sidebar-btn" rel="noopener noreferrer">
               <span
                 style={{
                   whiteSpace: "nowrap",
@@ -82,9 +81,9 @@ const SideBar = (props) => {
                   overflow: "hidden",
                 }}
               >
-                &#169; Admin
+                &#169; To home
               </span>
-            </a>
+            </Link>
           </div>
         </SidebarFooter>
       </ProSidebar>
