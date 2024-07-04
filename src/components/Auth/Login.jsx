@@ -1,11 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { useState } from "react";
+import { postLogin } from "../../services/apiService";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = () => {};
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    const res = await postLogin(email, password);
+
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      navigate("/");
+    }
+    if (res && res.EC !== 0) {
+      toast.error(res.EM);
+    }
+  };
   return (
     <>
       <div className="login-container">

@@ -28,7 +28,7 @@ const ModalDeleteUser = (props) => {
       setCurrentPage(1);
       await fetchGetAllUsersWithPaginate(1);
     }
-    if (data && data.EC === 1) {
+    if (data && data.EC !== 0) {
       toast.error(data.EM);
     }
   };
