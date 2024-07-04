@@ -7,6 +7,8 @@ import HomePage from "./components/Home/HomePage";
 import ManageUser from "./components/Admin/Content/ManageUser";
 import Dashboard from "./components/Admin/Content/Dashboard";
 import Login from "./components/Auth/Login";
+import LayoutAuth from "./components/Auth/LayoutAuth";
+import Register from "./components/Auth/Register";
 const Router = () => {
   return (
     <>
@@ -19,7 +21,22 @@ const Router = () => {
           <Route index element={<Dashboard />} />
           <Route path="manage-users" element={<ManageUser />} />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <LayoutAuth>
+              <Login />
+            </LayoutAuth>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <LayoutAuth>
+              <Register />
+            </LayoutAuth>
+          }
+        />
       </Routes>
     </>
   );

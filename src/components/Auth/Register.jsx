@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { postLogin } from "../../services/apiService";
+import { postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const Login = () => {
       );
   };
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
       toast.error("Invalid Email !");
@@ -27,11 +28,16 @@ const Login = () => {
       toast.error("Invalid Password !");
       return;
     }
-    const res = await postLogin(email, password);
+
+    if (!username) {
+      toast.error("Invalid Username !");
+      return;
+    }
+    const res = await postRegister(email, username, password);
 
     if (res && res.EC === 0) {
       toast.success(res.EM);
-      navigate("/");
+      navigate("/login");
     }
     if (res && res.EC !== 0) {
       toast.error(res.EM);
@@ -46,7 +52,7 @@ const Login = () => {
           </Link>
         </div>
         <div className="welcome mx-auto my-2 text-center fs-6">
-          Hello, who’s this?
+          Get better data with conversational forms, surveys, quizzes & more.
         </div>
         <div className="content-form mx-auto">
           <div className="form-group">
@@ -64,6 +70,20 @@ const Login = () => {
           </div>
 
           <div className="form-group mt-2">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="username"
+              className="form-control"
+              id="username"
+              placeholder="bruce wayne"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group mt-2">
             <label htmlFor="password" className="form-label">
               Password
             </label>
@@ -76,28 +96,22 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Link
-            to="#"
-            className="my-2 fs-6 text-decoration-underline d-block text-white"
-          >
-            Forgot password ?
-          </Link>
 
           <div className="form-group mt-4">
             <button
               className="btn btn-dark w-100"
-              onClick={() => handleLogin()}
+              onClick={() => handleRegister()}
             >
-              Login to React Quizz
+              Register to React Quizz
             </button>
           </div>
           <div className="header d-flex flex-column justify-content-end align-items-center gap-3 mt-3">
-            <span>Don't have an account yet?</span>
+            <span>Already have an account?</span>
             <button
               className="btn btn-outline-dark text-white"
-              onClick={() => navigate("/register")}
+              onClick={() => navigate("/login")}
             >
-              Sign up
+              Login
             </button>
           </div>
         </div>
@@ -106,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
