@@ -2,9 +2,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const account = useSelector((state) => state.user.account);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -30,22 +33,26 @@ const Header = () => {
             </NavLink>
           </Nav>
           <Nav>
-            <div className="d-flex gap-3">
-              <button
-                className="btn btn-outline-dark"
-                onClick={() => handleLogin()}
+            {isAuthenticated ? (
+              <NavDropdown
+                title={`Hello, ${account.username}`}
+                id="basic-nav-dropdown"
               >
-                Login
-              </button>
-              <button className="btn btn-dark">Sign up</button>
-            </div>
-            {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item>Login</NavDropdown.Item>
-              <NavDropdown.Item>Register</NavDropdown.Item>
-              <NavDropdown.Item>Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>Logout</NavDropdown.Item>
-            </NavDropdown> */}
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item>Logout</NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <div className="d-flex gap-3">
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={() => handleLogin()}
+                >
+                  Login
+                </button>
+                <button className="btn btn-dark">Sign up</button>
+              </div>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

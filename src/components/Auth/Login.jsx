@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { postLogin } from "../../services/apiService";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { loginAction } from "../../redux/action/userAction";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const validateEmail = (email) => {
     return String(email)
@@ -31,6 +33,7 @@ const Login = () => {
 
     if (res && res.EC === 0) {
       toast.success(res.EM);
+      dispatch(loginAction(res));
       navigate("/");
     }
     if (res && res.EC !== 0) {
