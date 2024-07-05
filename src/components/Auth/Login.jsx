@@ -4,9 +4,13 @@ import { postLogin } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/action/userAction";
+import { ImSpinner10 } from "react-icons/im";
+import "./Login.scss";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,15 +33,19 @@ const Login = () => {
       toast.error("Invalid Password !");
       return;
     }
+
+    setIsLoading(true);
     const res = await postLogin(email, password);
 
     if (res && res.EC === 0) {
       toast.success(res.EM);
       dispatch(loginAction(res));
+      setIsLoading(false);
       navigate("/");
     }
     if (res && res.EC !== 0) {
       toast.error(res.EM);
+      setIsLoading(false);
     }
   };
   return (
@@ -88,10 +96,12 @@ const Login = () => {
 
           <div className="form-group mt-4">
             <button
-              className="btn btn-dark w-100"
+              className="btn btn-dark w-100 d-flex align-items-center gap-2 justify-content-center"
               onClick={() => handleLogin()}
+              disabled={isLoading}
             >
-              Login to React Quizz
+              {isLoading === true && <ImSpinner10 className="loader-icon" />}
+              <span>Login to React Quizz</span>
             </button>
           </div>
           <div className="header d-flex flex-column justify-content-end align-items-center gap-3 mt-3">

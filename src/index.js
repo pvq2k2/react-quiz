@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import "nprogress/nprogress.css";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./Router";
