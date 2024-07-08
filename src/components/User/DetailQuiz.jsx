@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getDataQuiz } from "../../services/apiService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import "./DetailQuiz.scss";
+import Question from "./Question";
 const DetailQuiz = () => {
   const location = useLocation();
   const params = useParams();
   const quizId = params.id;
+
+  const [dataQuiz, setDataQuiz] = useState([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     fetchQuestions();
@@ -33,9 +37,18 @@ const DetailQuiz = () => {
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
-      console.log(data);
+      setDataQuiz(data);
     } else {
       toast.error(res.EM);
+    }
+  };
+  const handlePrev = () => {
+    if (index - 1 < 0) return;
+    setIndex(index - 1);
+  };
+  const handleNext = () => {
+    if (dataQuiz && dataQuiz.length > index + 1) {
+      setIndex(index + 1);
     }
   };
   return (
@@ -45,20 +58,22 @@ const DetailQuiz = () => {
           Quiz {quizId}: {location?.state?.quizTitle}
         </div>
         <hr />
-        <div className="q-body">
+        {/* <div className="q-body">
           <img src="" alt="" />
-        </div>
+        </div> */}
         <div className="q-content">
-          <div className="question">Question 1: How are you doing ?</div>
-          <div className="answer">
-            <div className="a-child">A. fsadfasd</div>
-            <div className="a-child">B. gfdgsrgs</div>
-            <div className="a-child">C. gẻgesger</div>
-          </div>
+          <Question
+            index={index}
+            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+          />
         </div>
         <div className="footer">
-          <button className="btn btn-primary">Prev</button>
-          <button className="btn btn-secondary">Next</button>
+          <button className="btn btn-primary" onClick={() => handlePrev()}>
+            Prev
+          </button>
+          <button className="btn btn-secondary" onClick={() => handleNext()}>
+            Next
+          </button>
         </div>
       </div>
       <div className="right-content">count down</div>

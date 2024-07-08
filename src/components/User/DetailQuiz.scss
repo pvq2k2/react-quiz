@@ -1,4 +1,4 @@
-.detal-quiz-container {
+.detail-quiz-container {
   display: flex;
   gap: 20px;
   padding: 50px;
@@ -9,9 +9,16 @@
       font-weight: 600;
     }
     .q-content {
+      user-select: none;
       .question {
         font-size: 20px;
         font-weight: 600;
+      }
+      .q-image {
+        img {
+          width: 300px;
+          height: 200px;
+        }
       }
     }
     .footer {
