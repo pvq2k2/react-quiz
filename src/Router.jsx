@@ -10,6 +10,8 @@ import Login from "./components/Auth/Login";
 import LayoutAuth from "./components/Auth/LayoutAuth";
 import Register from "./components/Auth/Register";
 import ListQuiz from "./components/User/ListQuiz";
+import NotFound from "./components/NotFound/NotFound";
+import DetailQuiz from "./components/User/DetailQuiz";
 const Router = () => {
   return (
     <>
@@ -18,6 +20,7 @@ const Router = () => {
           <Route index element={<HomePage />} />
           <Route path="users" element={<ListQuiz />} />
         </Route>
+        <Route path="/quiz/:id" element={<DetailQuiz />} />
         <Route path="/admins" element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path="manage-users" element={<ManageUser />} />
@@ -38,6 +41,7 @@ const Router = () => {
             </LayoutAuth>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

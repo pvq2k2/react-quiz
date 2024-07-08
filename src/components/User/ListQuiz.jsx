@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./ListQuiz.scss";
 import { getQuizByUser } from "../../services/apiService";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const ListQuiz = () => {
+  const navigate = useNavigate();
   const [arrQuiz, setArrQuiz] = useState([]);
 
   useEffect(() => {
@@ -34,7 +36,12 @@ const ListQuiz = () => {
               <div className="card-body">
                 <h5 className="card-title">Quiz {index + 1}</h5>
                 <p className="card-text">{quiz.description}</p>
-                <button className="btn btn-primary">Start Now</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate(`/quiz/${quiz.id}`)}
+                >
+                  Start Now
+                </button>
               </div>
             </div>
           );
