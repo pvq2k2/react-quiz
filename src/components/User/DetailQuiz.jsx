@@ -73,6 +73,32 @@ const DetailQuiz = () => {
       setIndex(index + 1);
     }
   };
+  const handleFinishQuiz = () => {
+    let payload = {
+      quizId: +quizId,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswerId = [];
+
+        question.answers.forEach((a) => {
+          if (a.isSelected) {
+            userAnswerId.push(a.id);
+          }
+        });
+
+        answers.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+      payload.answers = answers;
+      console.log("final: ", payload);
+    }
+  };
   return (
     <div className="detail-quiz-container">
       <div className="left-content">
@@ -97,7 +123,10 @@ const DetailQuiz = () => {
           <button className="btn btn-secondary" onClick={() => handleNext()}>
             Next
           </button>
-          <button className="btn btn-warning" onClick={() => handleNext()}>
+          <button
+            className="btn btn-warning"
+            onClick={() => handleFinishQuiz()}
+          >
             Finish
           </button>
         </div>
