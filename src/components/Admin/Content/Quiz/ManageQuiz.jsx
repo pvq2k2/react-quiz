@@ -3,6 +3,8 @@ import "./ManageQuiz.scss";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { postCreateNewQuiz } from "../../../../services/apiService";
+import TableQuiz from "./TableQuiz";
+import Accordion from "react-bootstrap/Accordion";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -34,63 +36,78 @@ const ManageQuiz = () => {
   return (
     <div className="quiz-container">
       <div className="title">Manage Quizzes</div>
-      <div className="add-new mt-3">
-        <fieldset className="border rounded-3 p-3">
-          <legend className="float-none w-auto px-3">Add new quiz</legend>
-          <form className="d-flex flex-lg-column gap-3">
-            <div className="form-group">
-              <label htmlFor="quiz-name" className="form-label">
-                Quiz name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="quiz-name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+
+      <Accordion defaultActiveKey="1" className="mt-3">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Add new quiz</Accordion.Header>
+          <Accordion.Body>
+            <div className="add-new mt-3">
+              <fieldset className="border rounded-3 p-3">
+                <legend className="float-none w-auto px-3">Add new quiz</legend>
+                <form className="d-flex flex-lg-column gap-3">
+                  <div className="form-group">
+                    <label htmlFor="quiz-name" className="form-label">
+                      Quiz name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="quiz-name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="description" className="form-label">
+                      Description
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      rows="3"
+                      onChange={(e) => setDescription(e.target.value)}
+                      value={description}
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="formFile" className="form-label">
+                      Difficulty level
+                    </label>
+                    <Select value={type} onChange={setType} options={options} />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="formFile" className="form-label">
+                      Upload Image
+                    </label>
+                    <input
+                      className="form-control"
+                      type="file"
+                      id="formFile"
+                      ref={inputFile}
+                    />
+                  </div>
+                </form>
+                <div className="mt-3">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleSubmitQuiz()}
+                  >
+                    Save
+                  </button>
+                </div>
+              </fieldset>
             </div>
-            <div className="form-group">
-              <label htmlFor="description" className="form-label">
-                Description
-              </label>
-              <textarea
-                className="form-control"
-                id="description"
-                rows="3"
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
-              ></textarea>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>List Quiz</Accordion.Header>
+          <Accordion.Body>
+            <div className="list-detail">
+              <TableQuiz />
             </div>
-            <div className="form-group">
-              <label htmlFor="formFile" className="form-label">
-                Difficulty level
-              </label>
-              <Select value={type} onChange={setType} options={options} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="formFile" className="form-label">
-                Upload Image
-              </label>
-              <input
-                className="form-control"
-                type="file"
-                id="formFile"
-                ref={inputFile}
-              />
-            </div>
-          </form>
-          <div className="mt-3">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSubmitQuiz()}
-            >
-              Save
-            </button>
-          </div>
-        </fieldset>
-      </div>
-      <div className="list-detail">table</div>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </div>
   );
 };
