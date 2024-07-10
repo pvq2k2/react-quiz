@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./ManageQuiz.scss";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import { postCreateNewQuiz } from "../../../../services/apiService";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -10,16 +12,31 @@ const options = [
 const ManageQuiz = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("EASY");
-  const [image, setImage] = useState(null);
-
-  const handleChangeFile = (e) => {};
+  const [type, setType] = useState("");
+  let inputFile = useRef();
+  const handleSubmitQuiz = async () => {
+    let image = inputFile.current.files[0];
+    if (!name || !description) {
+      toast.error("Name or description is required !");
+      return;
+    }
+    let res = await postCreateNewQuiz(description, name, type?.value, image);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      setName("");
+      setDescription("");
+      setType("");
+      inputFile.current.value = null;
+    } else {
+      toast.error(res.EM);
+    }
+  };
   return (
     <div className="quiz-container">
       <div className="title">Manage Quizzes</div>
       <div className="add-new mt-3">
-        <fieldset class="border rounded-3 p-3">
-          <legend class="float-none w-auto px-3">Add new quiz</legend>
+        <fieldset className="border rounded-3 p-3">
+          <legend className="float-none w-auto px-3">Add new quiz</legend>
           <form className="d-flex flex-lg-column gap-3">
             <div className="form-group">
               <label htmlFor="quiz-name" className="form-label">
@@ -38,57 +55,39 @@ const ManageQuiz = () => {
                 Description
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="description"
                 rows="3"
                 onChange={(e) => setDescription(e.target.value)}
-              >
-                {description}
-              </textarea>
+                value={description}
+              ></textarea>
             </div>
-            <div class="form-group">
-              <label for="formFile" class="form-label">
+            <div className="form-group">
+              <label htmlFor="formFile" className="form-label">
                 Difficulty level
               </label>
-              <Select
-                value={type}
-                // onChange={this.handleChange}
-                options={options}
-              />
+              <Select value={type} onChange={setType} options={options} />
             </div>
-            <div class="form-group">
-              <label for="formFile" class="form-label">
+            <div className="form-group">
+              <label htmlFor="formFile" className="form-label">
                 Upload Image
               </label>
               <input
-                class="form-control"
+                className="form-control"
                 type="file"
                 id="formFile"
-                onChange={(e) => handleChangeFile(e)}
+                ref={inputFile}
               />
             </div>
-
-            {/* <div className="col-md-12">
-              <label htmlFor="fileUpload" className="form-label label-upload">
-                <FcPlus />
-                Upload File Image
-              </label>
-              <input
-                type="file"
-                id="fileUpload"
-                hidden
-                onChange={(e) => handleUploadImage(e)}
-              />
-            </div>
-
-            <div className="col-md-12 img-preview">
-              {previewImage ? (
-                <img src={previewImage} alt="img preview" />
-              ) : (
-                <span>Preview Image</span>
-              )}
-            </div> */}
           </form>
+          <div className="mt-3">
+            <button
+              className="btn btn-primary"
+              onClick={() => handleSubmitQuiz()}
+            >
+              Save
+            </button>
+          </div>
         </fieldset>
       </div>
       <div className="list-detail">table</div>
