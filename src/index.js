@@ -1,14 +1,15 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "nprogress/nprogress.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
-import { PersistGate } from "redux-persist/integration/react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
-import "nprogress/nprogress.css";
-import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./redux/store";
+import reportWebVitals from "./reportWebVitals";
 import Router from "./Router";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
