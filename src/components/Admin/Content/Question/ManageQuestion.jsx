@@ -16,13 +16,13 @@ const ManageQuestion = () => {
   const [questions, setQuestions] = useState([
     {
       id: uuidv4(),
-      description: "question 1",
+      description: "",
       imageFile: "",
       imageName: "",
       answers: [
         {
           id: uuidv4(),
-          description: "answer 1",
+          description: "",
           isCorrect: false,
         },
       ],
@@ -81,6 +81,57 @@ const ManageQuestion = () => {
       setQuestions(questionClone);
     }
   };
+
+  const handleOnChange = (type, questionId, value) => {
+    if (type === "QUESTION") {
+      let questionClone = _.cloneDeep(questions);
+      const questionIndex = questionClone.findIndex(
+        (question) => question.id === questionId
+      );
+      if (questionIndex > -1) {
+        questionClone[questionIndex].description = value;
+        setQuestions(questionClone);
+      }
+    }
+  };
+  const handleOnChangeFileQuestion = (questionId, event) => {
+    let questionClone = _.cloneDeep(questions);
+    const questionIndex = questionClone.findIndex(
+      (question) => question.id === questionId
+    );
+    if (questionIndex > -1 && event.target.files && event.target.files[0]) {
+      questionClone[questionIndex].imageFile = event.target.files[0];
+      questionClone[questionIndex].imageName = event.target.files[0].name;
+      setQuestions(questionClone);
+    }
+  };
+
+  const handleAnswerQuestion = (type, answerId, questionId, value) => {
+    let questionClone = _.cloneDeep(questions);
+    const questionIndex = questionClone.findIndex(
+      (question) => question.id === questionId
+    );
+    if (questionIndex > -1) {
+      questionClone[questionIndex].answers = questionClone[
+        questionIndex
+      ].answers.map((answer) => {
+        if (answer.id === answerId) {
+          if (type === "CHECKBOX") {
+            answer.isCorrect = value;
+          }
+          if (type === "INPUT") {
+            answer.description = value;
+          }
+        }
+        return answer;
+      });
+      setQuestions(questionClone);
+    }
+  };
+
+  const handleSubmitQuestionForQuiz = () => {
+    console.log(questions);
+  };
   return (
     <div className="manage-question-container">
       <div className="title">Manage Questions</div>
@@ -108,6 +159,13 @@ const ManageQuestion = () => {
                       className="form-control"
                       id="floatingInput-question"
                       value={question.description}
+                      onChange={(event) =>
+                        handleOnChange(
+                          "QUESTION",
+                          question.id,
+                          event.target.value
+                        )
+                      }
                       placeholder="Question's description"
                     />
                     <label htmlFor="floatingInput-question">
@@ -118,17 +176,26 @@ const ManageQuestion = () => {
                   <div className="mb-3 d-flex align-items-center gap-3">
                     <div className="d-flex gap-3 align-items-center">
                       <div className="box-upload-file">
-                        <label htmlFor="fileUpload" className="label-upload">
+                        <label
+                          htmlFor={`${question.id}`}
+                          className="label-upload"
+                        >
                           <RiImageAddFill />
                         </label>
                         <input
                           type="file"
-                          id="fileUpload"
+                          id={`${question.id}`}
                           hidden
-                          // onChange={(e) => handleUploadImage(e)}
+                          onChange={(e) =>
+                            handleOnChangeFileQuestion(question.id, e)
+                          }
                         />
                       </div>
-                      <span>0 file is uploaded</span>
+                      <span>
+                        {question.imageName
+                          ? question.imageName
+                          : "0 file is uploaded"}
+                      </span>
                     </div>
 
                     <div className="action-question d-flex align-items-center gap-2 mb-1 ms-2">
@@ -165,6 +232,14 @@ const ManageQuestion = () => {
                               className="form-check-input"
                               type="checkbox"
                               checked={answer.isCorrect}
+                              onChange={(event) =>
+                                handleAnswerQuestion(
+                                  "CHECKBOX",
+                                  answer.id,
+                                  question.id,
+                                  event.target.checked
+                                )
+                              }
                             />
                           </div>
                         </div>
@@ -174,6 +249,14 @@ const ManageQuestion = () => {
                             className="form-control"
                             id="floatingInput-answer"
                             value={answer.description}
+                            onChange={(event) =>
+                              handleAnswerQuestion(
+                                "INPUT",
+                                answer.id,
+                                question.id,
+                                event.target.value
+                              )
+                            }
                             placeholder="Answer 1"
                           />
                           <label htmlFor="floatingInput-answer">
@@ -215,6 +298,16 @@ const ManageQuestion = () => {
               </div>
             );
           })}
+        {questions && questions.length > 0 && (
+          <div>
+            <button
+              className="btn btn-primary"
+              onClick={() => handleSubmitQuestionForQuiz()}
+            >
+              Save Questions
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
