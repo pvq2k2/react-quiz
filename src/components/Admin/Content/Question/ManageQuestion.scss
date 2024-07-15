@@ -10,17 +10,13 @@
     .question {
       .box-upload-file {
         .label-upload {
-          display: flex;
-          gap: 5px;
-          align-items: center;
-          width: fit-content;
-          padding: 3px 10px;
-          border-radius: 5px;
-          background-color: #eeeeee;
+          font-size: 30px;
+          margin-bottom: 5px;
+          color: rgb(98, 1, 90);
           cursor: pointer;
 
           &:hover {
-            background-color: #dcdcdc;
+            color: rgb(197, 6, 181);
           }
         }
       }
@@ -28,17 +24,18 @@
 
     .action-icon {
       font-size: 30px;
+      cursor: pointer;
 
       &.plus {
         color: green;
         &:hover {
-          color: rgb(1, 85, 1);
+          color: rgb(4, 197, 4);
         }
       }
       &.minus {
-        color: red;
+        color: rgb(199, 4, 4);
         &:hover {
-          color: rgb(110, 4, 4);
+          color: red;
         }
       }
     }
