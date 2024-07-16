@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ManageQuestion.scss";
 import Select from "react-select";
 import { BsFillPatchPlusFill, BsFillPatchMinusFill } from "react-icons/bs";
@@ -7,13 +7,12 @@ import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import {
+  getAllQuizForAdmin,
+  postCreateNewAnswerForQuestion,
+  postCreateNewQuestionForQuiz,
+} from "../../../../services/apiService";
 const ManageQuestion = () => {
-  const options = [
-    { value: "EASY", label: "EASY" },
-    { value: "MEDIUM", label: "MEDIUM" },
-    { value: "HARD", label: "HARD" },
-  ];
-  const [selectedQuiz, setSelectedQuiz] = useState("");
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
     title: "",
@@ -34,6 +33,27 @@ const ManageQuestion = () => {
       ],
     },
   ]);
+
+  const [listQuiz, setListQuiz] = useState([]);
+  const [selectedQuiz, setSelectedQuiz] = useState({});
+
+  useEffect(() => {
+    fetchGetAllQuiz();
+  }, []);
+
+  const fetchGetAllQuiz = async () => {
+    const res = await getAllQuizForAdmin();
+
+    if (res.EC === 0) {
+      let listQuizMap = res.DT.map((item) => {
+        return {
+          value: item.id,
+          label: `${item.id} - ${item.description}`,
+        };
+      });
+      setListQuiz(listQuizMap);
+    }
+  };
 
   const handleAddRemoveQuestion = (type, id) => {
     console.log(type, id);
@@ -100,6 +120,7 @@ const ManageQuestion = () => {
       }
     }
   };
+
   const handleOnChangeFileQuestion = (questionId, event) => {
     let questionClone = _.cloneDeep(questions);
     const questionIndex = questionClone.findIndex(
@@ -149,8 +170,30 @@ const ManageQuestion = () => {
     }
   };
 
-  const handleSubmitQuestionForQuiz = () => {
-    console.log(questions);
+  const handleSubmitQuestionForQuiz = async () => {
+    //todo
+    //validate data
+
+    //submit question
+    await Promise.all(
+      questions.map(async (question) => {
+        const resQ = await postCreateNewQuestionForQuiz(
+          +selectedQuiz.value,
+          question.description,
+          question.imageFile
+        );
+        //submit answer
+        await Promise.all(
+          question.answers.map(async (answer) => {
+            await postCreateNewAnswerForQuestion(
+              answer.description,
+              answer.isCorrect,
+              resQ.DT.id
+            );
+          })
+        );
+      })
+    );
   };
   return (
     <div className="manage-question-container">
@@ -163,7 +206,7 @@ const ManageQuestion = () => {
           <Select
             value={selectedQuiz}
             onChange={setSelectedQuiz}
-            options={options}
+            options={listQuiz}
           />
         </div>
         <span className="mt-3 mb-2 d-inline-block">Add new question</span>
