@@ -84,6 +84,14 @@ const getAllQuizForAdmin = () => {
   return axios.get("api/v1/quiz/all");
 };
 
+const postAssignQuiz = (quizId, userId) => {
+  return axios.post("api/v1/quiz-assign-to-user", { quizId, userId });
+};
+
+const getQuizWithQA = (quizId) => {
+  return axios.get(`api/v1/quiz-with-qa/${quizId}`);
+};
+
 // Question
 const getDataQuiz = (id) => {
   return axios.get(`api/v1/questions-by-quiz?quizId=${id}`);
@@ -132,4 +140,6 @@ export {
   deleteQuiz,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
+  postAssignQuiz,
+  getQuizWithQA,
 };

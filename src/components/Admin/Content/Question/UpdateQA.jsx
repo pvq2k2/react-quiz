@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { BsFillPatchPlusFill, BsFillPatchMinusFill } from "react-icons/bs";
@@ -8,6 +9,7 @@ import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import {
   getAllQuizForAdmin,
+  getQuizWithQA,
   postCreateNewAnswerForQuestion,
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiService";
@@ -41,6 +43,39 @@ const UpdateQA = () => {
   useEffect(() => {
     fetchGetAllQuiz();
   }, []);
+
+  useEffect(() => {
+    if (selectedQuiz && selectedQuiz.value) {
+      fetchQuizWithQA();
+    }
+  }, [selectedQuiz]);
+
+  const urltoFile = async (url, filename, mimeType) => {
+    const res = await fetch(url);
+    const buf = await res.arrayBuffer();
+    return new File([buf], filename, { type: mimeType });
+  };
+
+  const fetchQuizWithQA = async () => {
+    const res = await getQuizWithQA(selectedQuiz.value);
+
+    if (res.EC === 0) {
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let q = res.DT.qa[i];
+        if (q.imageFile) {
+          q.imageName = `Question-${q.id}.png`;
+          q.imageFile = await urltoFile(
+            `data:image/png;base64,${q.imageFile}`,
+            `Question-${q.id}.png`,
+            "image/png"
+          );
+        }
+        newQA.push(q);
+      }
+      setQuestions(newQA);
+    }
+  };
 
   const fetchGetAllQuiz = async () => {
     const res = await getAllQuizForAdmin();
@@ -245,7 +280,7 @@ const UpdateQA = () => {
             options={listQuiz}
           />
         </div>
-        <span className="mt-3 mb-2 d-inline-block">Add new question</span>
+        <span className="mt-3 mb-2 d-inline-block">Update question</span>
         {questions &&
           questions.length > 0 &&
           questions.map((question, index) => {

@@ -5,7 +5,9 @@ import Select from "react-select";
 import {
   getAllQuizForAdmin,
   getAllUsers,
+  postAssignQuiz,
 } from "../../../../services/apiService";
+import { toast } from "react-toastify";
 const ModalAssignQuiz = (props) => {
   const { show, setShow } = props;
 
@@ -27,7 +29,7 @@ const ModalAssignQuiz = (props) => {
       let listQuizMap = res.DT.map((item) => {
         return {
           value: item.id,
-          label: `${item.id} - ${item.description}`,
+          label: `${item.id} - ${item.name}`,
         };
       });
       setListQuiz(listQuizMap);
@@ -50,45 +52,14 @@ const ModalAssignQuiz = (props) => {
 
   const handleClose = () => setShow(false);
 
-  const handleSubmitQuiz = async () => {
-    // let res;
-    // switch (typeModal) {
-    //   case "CREATE": {
-    //     if (!name || !description) {
-    //       toast.error("Name or description is required !");
-    //       return;
-    //     }
-    //     res = await postCreateNewQuiz(description, name, type?.value, image);
-    //     break;
-    //   }
-    //   case "UPDATE": {
-    //     if (!name || !description) {
-    //       toast.error("Name or description is required !");
-    //       return;
-    //     }
-    //     res = await putUpdateQuiz(
-    //       dataQuiz.id,
-    //       description,
-    //       name,
-    //       type?.value,
-    //       image
-    //     );
-    //     break;
-    //   }
-    //   case "DELETE": {
-    //     res = await deleteQuiz(dataQuiz.id);
-    //     break;
-    //   }
-    //   default:
-    //     break;
-    // }
-    // if (res && res.EC === 0) {
-    //   toast.success(res.EM);
-    //   await fetchGetAllQuiz();
-    //   handleClose();
-    // } else {
-    //   toast.error(res.EM);
-    // }
+  const handleAssignQuiz = async () => {
+    const res = await postAssignQuiz(selectedQuiz.value, selectedUser.value);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      handleClose();
+    } else {
+      toast.error(res.EM);
+    }
   };
   return (
     <>
@@ -100,7 +71,7 @@ const ModalAssignQuiz = (props) => {
         onHide={handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Assign Quiz For User</Modal.Title>
+          <Modal.Title>Assign Quiz To User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="assign-quiz-container row">
@@ -126,7 +97,7 @@ const ModalAssignQuiz = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmitQuiz()}>
+          <Button variant="primary" onClick={() => handleAssignQuiz()}>
             Assign
           </Button>
         </Modal.Footer>

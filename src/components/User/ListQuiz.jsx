@@ -19,7 +19,7 @@ const ListQuiz = () => {
     }
   };
   return (
-    <div className="list-quiz-container container">
+    <div className="list-quiz-container container mt-5">
       {arrQuiz && arrQuiz.length > 0 ? (
         arrQuiz.map((quiz, index) => {
           return (
