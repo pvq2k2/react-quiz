@@ -3,10 +3,12 @@ import "./ManageQuiz.scss";
 import TableQuiz from "./TableQuiz";
 import ModalQuiz from "./ModalQuiz";
 import { getAllQuizForAdmin } from "../../../../services/apiService";
+import ModalAssignQuiz from "./ModalAssignQuiz";
 
 const ManageQuiz = () => {
   const [typeModal, setTypeModal] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showModalAssign, setShowModalAssign] = useState(false);
   const [dataQuiz, setDataQuiz] = useState({});
   const [listQuiz, setListQuiz] = useState([]);
 
@@ -33,12 +35,19 @@ const ManageQuiz = () => {
   return (
     <div className="quiz-container">
       <div className="title">Manage Quizzes</div>
-      <div className="py-3">
+      <div className="py-3 d-flex gap-5">
         <button
           className="btn btn-primary"
           onClick={() => handleModal("CREATE")}
         >
           Add Quiz
+        </button>
+
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowModalAssign(true)}
+        >
+          Assign Quiz
         </button>
       </div>
 
@@ -58,6 +67,8 @@ const ManageQuiz = () => {
         setDataQuiz={setDataQuiz}
         fetchGetAllQuiz={fetchGetAllQuiz}
       />
+
+      <ModalAssignQuiz show={showModalAssign} setShow={setShowModalAssign} />
     </div>
   );
 };
