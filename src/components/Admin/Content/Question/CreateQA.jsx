@@ -57,7 +57,6 @@ const CreateQA = () => {
   };
 
   const handleAddRemoveQuestion = (type, id) => {
-    console.log(type, id);
     if (type === "ADD") {
       const newQuestion = {
         id: uuidv4(),

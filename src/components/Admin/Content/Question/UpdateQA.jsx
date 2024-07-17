@@ -10,8 +10,7 @@ import Lightbox from "react-awesome-lightbox";
 import {
   getAllQuizForAdmin,
   getQuizWithQA,
-  postCreateNewAnswerForQuestion,
-  postCreateNewQuestionForQuiz,
+  postUpsertQA,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
 const UpdateQA = () => {
@@ -56,6 +55,14 @@ const UpdateQA = () => {
     return new File([buf], filename, { type: mimeType });
   };
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   const fetchQuizWithQA = async () => {
     const res = await getQuizWithQA(selectedQuiz.value);
 
@@ -92,17 +99,16 @@ const UpdateQA = () => {
   };
 
   const handleAddRemoveQuestion = (type, id) => {
-    console.log(type, id);
     if (type === "ADD") {
       const newQuestion = {
         id: uuidv4(),
-        description: "question 1",
+        description: "",
         imageFile: "",
         imageName: "",
         answers: [
           {
             id: uuidv4(),
-            description: "answer 1",
+            description: "",
             isCorrect: false,
           },
         ],
@@ -249,23 +255,22 @@ const UpdateQA = () => {
       return;
     }
 
-    for (const question of questions) {
-      const resQ = await postCreateNewQuestionForQuiz(
-        +selectedQuiz.value,
-        question.description,
-        question.imageFile
-      );
-      for (const answer of question.answers) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          resQ.DT.id
+    const questionsClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionsClone.length; i++) {
+      if (questionsClone[i].imageFile) {
+        questionsClone[i].imageFile = await toBase64(
+          questionsClone[i].imageFile
         );
       }
     }
-
-    toast.success("Create question and answer succsed !");
-    setQuestions(initQuestion);
+    let res = await postUpsertQA({
+      quizId: selectedQuiz.value,
+      questions: questionsClone,
+    });
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      await fetchQuizWithQA();
+    }
   };
   return (
     <>
