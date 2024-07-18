@@ -461,6 +461,10 @@ const UpdateQA = () => {
             onClose={() => setIsPreviewImage(false)}
           />
         )}
+
+        {_.isEmpty(questions) && (
+          <div>No question, Please create question !</div>
+        )}
       </div>
     </>
   );

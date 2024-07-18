@@ -26,15 +26,25 @@ const ListQuiz = () => {
             <div
               key={`quiz-${index}`}
               className="card"
-              style={{ width: "18rem" }}
+              // style={{ width: "18rem" }}
             >
               <img
                 src={`data:image/jpeg;base64,${quiz.image}`}
                 className="card-img-top"
                 alt="imgQuiz"
+                style={{ objectFit: "cover", height: "200px" }}
               />
               <div className="card-body">
-                <h5 className="card-title">Quiz {index + 1}</h5>
+                <h5
+                  className="card-title"
+                  // style={{
+                  //   whiteSpace: "nowrap",
+                  //   overflow: "hidden",
+                  //   textOverflow: "ellipsis",
+                  // }}
+                >
+                  Quiz {index + 1}
+                </h5>
                 <p className="card-text">{quiz.description}</p>
                 <button
                   className="btn btn-primary"
