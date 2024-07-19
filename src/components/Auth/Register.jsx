@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
-
+import { IoPerson, IoMail, IoLockClosed } from "react-icons/io5";
+import imageForm from "../../assets/signup-image.jpg";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -45,77 +46,81 @@ const Register = () => {
   };
   return (
     <>
-      <div className="form-box w-100 p-5">
-        <div className="title mx-auto text-center fs-3 fw-bold">
-          <Link to="/" className="text-white">
-            React Quizz
-          </Link>
-        </div>
-        <div className="welcome mx-auto my-2 text-center fs-6">
-          Get better data with conversational forms, surveys, quizzes & more.
-        </div>
-        <div className="content-form mx-auto">
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="bruce@wayne.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+      <section className="signup">
+        <div className="container">
+          <div className="signup-content">
+            <div className="signup-form">
+              <h2 className="form-title">Sign up</h2>
+              <div className="register-form" id="register-form">
+                <div className="form-group">
+                  <label htmlFor="email">
+                    <IoMail className="icons" />
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="username">
+                    <IoPerson className="icons" />
+                  </label>
+                  <input
+                    type="text"
+                    id="username"
+                    placeholder="User name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">
+                    <IoLockClosed className="icons" />
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="form-group form-button d-flex justify-content-center">
+                  <button
+                    name="signup"
+                    id="signup"
+                    className="form-submit"
+                    onClick={() => handleRegister()}
+                  >
+                    Register to React Quizz
+                  </button>
+                </div>
 
-          <div className="form-group mt-2">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input
-              type="username"
-              className="form-control"
-              id="username"
-              placeholder="bruce wayne"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group mt-2">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="At least 8 characters"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group mt-4">
-            <button
-              className="btn btn-dark w-100"
-              onClick={() => handleRegister()}
-            >
-              Register to React Quizz
-            </button>
-          </div>
-          <div className="header d-flex flex-column justify-content-end align-items-center gap-3 mt-3">
-            <span>Already have an account?</span>
-            <button
-              className="btn btn-outline-dark text-white"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
+                <div
+                  className="signup-image-link"
+                  onClick={() => navigate("/login")}
+                >
+                  I am already member
+                </div>
+                <div
+                  className="signup-image-link"
+                  onClick={() => navigate("/")}
+                >
+                  Go to homepage
+                </div>
+              </div>
+            </div>
+            <div className="signup-image">
+              <figure>
+                <img src={imageForm} alt="singupimage" />
+              </figure>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

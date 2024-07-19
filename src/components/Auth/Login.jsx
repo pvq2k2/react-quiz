@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { postLogin } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/action/userAction";
 import { ImSpinner10 } from "react-icons/im";
+import { IoMail, IoLockClosed } from "react-icons/io5";
+import imageForm from "../../assets/signin-image.jpg";
 import "./Login.scss";
 
 const Login = () => {
@@ -50,7 +52,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="form-box w-100 p-5">
+      {/* <div className="form-box w-100 p-5">
         <div className="title mx-auto text-center fs-3 fw-bold">
           <Link to="/" className="text-white">
             React Quizz
@@ -114,7 +116,95 @@ const Login = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      {/* Sing in  Form */}
+      <section className="signin">
+        <div className="container">
+          <div className="signin-content">
+            <div className="signin-image">
+              <figure>
+                <img src={imageForm} alt="singinimage" />
+              </figure>
+            </div>
+            <div className="signin-form">
+              <h2 className="form-title">Sign in</h2>
+              <div className="register-form" id="login-form">
+                <div className="form-group">
+                  <label htmlFor="email">
+                    <IoMail className="icons" />
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">
+                    <IoLockClosed className="icons" />
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="form-group form-button d-flex align-items-center gap-2 justify-content-center">
+                  <button
+                    name="signup"
+                    id="signup"
+                    className="form-submit d-flex align-items-center gap-2 justify-content-center"
+                    onClick={() => handleLogin()}
+                    disabled={isLoading}
+                  >
+                    {isLoading === true && (
+                      <ImSpinner10 className="loader-icon" />
+                    )}
+                    <span>Login to React Quizz</span>
+                  </button>
+                </div>
+                <div
+                  className="signup-image-link"
+                  onClick={() => navigate("/register")}
+                >
+                  Create an account
+                </div>
+                <div
+                  className="signup-image-link"
+                  onClick={() => navigate("/")}
+                >
+                  Go to homepage
+                </div>
+              </div>
+              {/* <div className="social-login">
+                <span className="social-label">Or login with</span>
+                <ul className="socials">
+                  <li>
+                    <a href="#">
+                      <i className="display-flex-center zmdi zmdi-facebook" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="display-flex-center zmdi zmdi-twitter" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="display-flex-center zmdi zmdi-google" />
+                    </a>
+                  </li>
+                </ul>
+              </div> */}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
