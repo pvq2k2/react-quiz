@@ -44,6 +44,11 @@ const Register = () => {
       toast.error(res.EM);
     }
   };
+  const handleKeyDown = (event) => {
+    if (event && event.key === "Enter") {
+      handleRegister();
+    }
+  };
   return (
     <>
       <section className="signup">
@@ -94,6 +99,7 @@ const Register = () => {
                     id="signup"
                     className="form-submit"
                     onClick={() => handleRegister()}
+                    onKeyDown={(event) => handleKeyDown(event)}
                   >
                     Register to React Quizz
                   </button>
