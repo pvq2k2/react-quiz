@@ -7,6 +7,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { postLogout } from "../../services/apiService";
 import { logoutAction } from "../../redux/action/userAction";
 import { toast } from "react-toastify";
+import Language from "./Language";
 const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -67,6 +68,7 @@ const Header = () => {
                 <button className="btn btn-dark">Sign up</button>
               </div>
             )}
+            <Language />
           </Nav>
         </Navbar.Collapse>
       </Container>
