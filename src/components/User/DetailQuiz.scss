@@ -73,9 +73,14 @@
         justify-content: center;
         cursor: pointer;
 
-        &:hover {
+        &:hover,
+        &.clicked {
           color: red;
           border-color: red;
+        }
+
+        &.selected {
+          background-color: #c6c6c6;
         }
       }
     }
