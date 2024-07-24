@@ -1,4 +1,4 @@
-import React from "react";
+import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "./App";
 import User from "./components/User/User";
@@ -17,7 +17,7 @@ import ManageQuestion from "./components/Admin/Content/Question/ManageQuestion";
 import PrivateRoute from "./components/Route/PrivateRoute";
 const Router = () => {
   return (
-    <>
+    <Suspense fallback={<h1>Loading...</h1>}>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
@@ -69,7 +69,7 @@ const Router = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </Suspense>
   );
 };
 

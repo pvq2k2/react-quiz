@@ -3,6 +3,7 @@ import "nprogress/nprogress.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "react-awesome-lightbox/build/style.css";
+import "./utils/i18n";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
