@@ -134,6 +134,10 @@ const postCreateNewAnswerForQuestion = (
   });
 };
 
+// Dashboard
+const getOverView = () => {
+  return axios.get("api/v1/overview");
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -155,4 +159,5 @@ export {
   getQuizWithQA,
   postUpsertQA,
   postLogout,
+  getOverView,
 };
