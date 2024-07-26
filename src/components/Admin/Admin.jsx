@@ -2,11 +2,31 @@ import SideBar from "./SideBar";
 import "./Admin.scss";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Language from "../../components/Header/Language";
+import { NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { postLogout } from "../../services/apiService";
+import { logoutAction } from "../../redux/action/userAction";
+import { toast } from "react-toastify";
+
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
 
+  const account = useSelector((state) => state.user.account);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogOut = async () => {
+    let res = await postLogout(account.email, account.refresh_token);
+    if (res && res.EC === 0) {
+      dispatch(logoutAction());
+      navigate("/login");
+    } else {
+      toast.error(res.EM);
+    }
+  };
   return (
     <div className="admin-container">
       <div className="admin-sidebar">
@@ -14,7 +34,22 @@ const Admin = (props) => {
       </div>
       <div className="admin-content">
         <div className="admin-header">
-          <FaBars onClick={() => setCollapsed(!collapsed)} />
+          <span onClick={() => setCollapsed(!collapsed)}>
+            <FaBars className="leftside" />
+          </span>
+          <div className="rightside">
+            <Language />
+            <NavDropdown
+              title={`Hello, ${account.username}`}
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={() => handleLogOut()}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          </div>
         </div>
         <div className="admin-main">
           <PerfectScrollbar>
