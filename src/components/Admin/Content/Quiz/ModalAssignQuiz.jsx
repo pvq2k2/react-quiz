@@ -8,9 +8,10 @@ import {
   postAssignQuiz,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 const ModalAssignQuiz = (props) => {
   const { show, setShow } = props;
-
+  const { t } = useTranslation();
   const [listQuiz, setListQuiz] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState({});
 
@@ -71,12 +72,12 @@ const ModalAssignQuiz = (props) => {
         onHide={handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Assign Quiz To User</Modal.Title>
+          <Modal.Title>{t("modalassignquiz.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="assign-quiz-container row">
             <div className="col-6 form-group">
-              <label className="mb-2">Select quiz</label>
+              <label className="mb-2">{t("modalassignquiz.selectquiz")}</label>
               <Select
                 defaultValue={selectedQuiz}
                 onChange={setSelectedQuiz}
@@ -84,7 +85,7 @@ const ModalAssignQuiz = (props) => {
               />
             </div>
             <div className="col-6 form-group">
-              <label className="mb-2">Select user</label>
+              <label className="mb-2">{t("modalassignquiz.selectuser")}</label>
               <Select
                 defaultValue={selectedUser}
                 onChange={setSelectedUser}
@@ -95,10 +96,10 @@ const ModalAssignQuiz = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("modalassignquiz.btn.close")}
           </Button>
           <Button variant="primary" onClick={() => handleAssignQuiz()}>
-            Assign
+            {t("modalassignquiz.btn.assign")}
           </Button>
         </Modal.Footer>
       </Modal>

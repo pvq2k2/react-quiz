@@ -3,10 +3,11 @@ import "./ListQuiz.scss";
 import { getQuizByUser } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const ListQuiz = () => {
   const navigate = useNavigate();
   const [arrQuiz, setArrQuiz] = useState([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     getQuizData();
   }, []);
@@ -43,7 +44,7 @@ const ListQuiz = () => {
                   //   textOverflow: "ellipsis",
                   // }}
                 >
-                  Quiz {index + 1}
+                  {t("userlistquiz.title")} {index + 1}
                 </h5>
                 <p className="card-text">{quiz.description}</p>
                 <button
@@ -54,14 +55,14 @@ const ListQuiz = () => {
                     })
                   }
                 >
-                  Start Now
+                  {t("userlistquiz.btnconten")}
                 </button>
               </div>
             </div>
           );
         })
       ) : (
-        <div>You don't have any quiz now...</div>
+        <div>{t("userlistquiz.noquiz")}</div>
       )}
     </div>
   );

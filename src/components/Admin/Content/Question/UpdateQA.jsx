@@ -12,8 +12,10 @@ import {
   getQuizWithQA,
   postUpsertQA,
 } from "../../../../services/apiService";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 const UpdateQA = () => {
+  const { t } = useTranslation();
   const initQuestion = [
     {
       id: uuidv4(),
@@ -277,7 +279,7 @@ const UpdateQA = () => {
       <div className="py-3">
         <div className="form-group col-6">
           <label htmlFor="formFile" className="form-label">
-            Select Quiz
+            {t("createupdateqa.selectquiz")}
           </label>
           <Select
             value={selectedQuiz}
@@ -285,7 +287,9 @@ const UpdateQA = () => {
             options={listQuiz}
           />
         </div>
-        <span className="mt-3 mb-2 d-inline-block">Update question</span>
+        <span className="mt-3 mb-2 d-inline-block">
+          {t("createupdateqa.update")}
+        </span>
         {questions &&
           questions.length > 0 &&
           questions.map((question, index) => {
@@ -305,10 +309,10 @@ const UpdateQA = () => {
                           event.target.value
                         )
                       }
-                      placeholder="Question's description"
+                      placeholder={t("createupdateqa.input.question")}
                     />
                     <label htmlFor="floatingInput-question">
-                      Question {index + 1} 's description
+                      {`${t("createupdateqa.input.question")} ${index + 1}`}
                     </label>
                   </div>
 
@@ -339,7 +343,7 @@ const UpdateQA = () => {
                             {question.imageName}
                           </span>
                         ) : (
-                          "0 file is uploaded"
+                          t("createupdateqa.input.fileupload")
                         )}
                       </span>
                     </div>
@@ -403,10 +407,10 @@ const UpdateQA = () => {
                                 event.target.value
                               )
                             }
-                            placeholder="Answer 1"
+                            placeholder={t("createupdateqa.input.answer")}
                           />
                           <label htmlFor="floatingInput-answer">
-                            Answer {index + 1}
+                            {t("createupdateqa.input.answer")} {index + 1}
                           </label>
                         </div>
 
@@ -450,7 +454,7 @@ const UpdateQA = () => {
               className="btn btn-primary"
               onClick={() => handleSubmitQuestionForQuiz()}
             >
-              Save Questions
+              {t("createupdateqa.btn.save")}
             </button>
           </div>
         )}
@@ -462,9 +466,7 @@ const UpdateQA = () => {
           />
         )}
 
-        {_.isEmpty(questions) && (
-          <div>No question, Please create question !</div>
-        )}
+        {_.isEmpty(questions) && <div>{t("createupdateqa.noquestion")}</div>}
       </div>
     </>
   );

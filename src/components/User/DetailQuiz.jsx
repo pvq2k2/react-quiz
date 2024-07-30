@@ -8,10 +8,12 @@ import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
 import RightContent from "./Content/RightContent";
+import { useTranslation } from "react-i18next";
 const DetailQuiz = () => {
   const location = useLocation();
   const params = useParams();
   const quizId = params.id;
+  const { t } = useTranslation();
 
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
@@ -119,7 +121,7 @@ const DetailQuiz = () => {
     <div className="detail-quiz-container">
       <div className="left-content">
         <div className="title">
-          Quiz {quizId}: {location?.state?.quizTitle}
+          {t("userdetailquiz.title")} {quizId}: {location?.state?.quizTitle}
         </div>
         <hr />
         {/* <div className="q-body">
@@ -134,16 +136,16 @@ const DetailQuiz = () => {
         </div>
         <div className="footer">
           <button className="btn btn-primary" onClick={() => handlePrev()}>
-            Prev
+            {t("userdetailquiz.btn.prev")}
           </button>
           <button className="btn btn-secondary" onClick={() => handleNext()}>
-            Next
+            {t("userdetailquiz.btn.next")}
           </button>
           <button
             className="btn btn-warning"
             onClick={() => handleFinishQuiz()}
           >
-            Finish
+            {t("userdetailquiz.btn.finish")}
           </button>
         </div>
       </div>

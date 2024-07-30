@@ -1,15 +1,17 @@
+import { useTranslation } from "react-i18next";
 const TableQuiz = (props) => {
   const { listQuiz, handleModal } = props;
+  const { t } = useTranslation();
   return (
     <>
       <table className="table table-hover table-bordered">
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Difficulty</th>
-            <th scope="col">Action</th>
+            <th scope="col">{t("tablequiz.th.name")}</th>
+            <th scope="col">{t("tablequiz.th.description")}</th>
+            <th scope="col">{t("tablequiz.th.difficulty")}</th>
+            <th scope="col">{t("tablequiz.th.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -26,19 +28,19 @@ const TableQuiz = (props) => {
                       className="btn btn-info"
                       onClick={() => handleModal("VIEW", item)}
                     >
-                      View
+                      {t("tablequiz.btn.view")}
                     </button>
                     <button
                       className="btn btn-warning mx-3"
                       onClick={() => handleModal("UPDATE", item)}
                     >
-                      Update
+                      {t("tablequiz.btn.update")}
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleModal("DELETE", item)}
                     >
-                      Delete
+                      {t("tablequiz.btn.delete")}
                     </button>
                   </td>
                 </tr>
@@ -46,7 +48,7 @@ const TableQuiz = (props) => {
             })
           ) : (
             <tr>
-              <td colSpan={5}>No quiz</td>
+              <td colSpan={5}>{t("tablequiz.nodata")}</td>
             </tr>
           )}
         </tbody>

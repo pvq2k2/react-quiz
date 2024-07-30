@@ -17,9 +17,10 @@ import { MdDashboard } from "react-icons/md";
 
 import "./SideBar.scss";
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const SideBar = (props) => {
   const { collapsed, toggled, handleToggleSidebar } = props;
+  const { t } = useTranslation();
   return (
     <>
       <ProSidebar
@@ -43,29 +44,29 @@ const SideBar = (props) => {
             }}
           >
             <DiReact size={"3em"} color={"00bfff"} />
-            <span>Admin</span>
+            <span>{t("sidebar.brand")}</span>
           </div>
         </SidebarHeader>
 
         <SidebarContent>
           <Menu iconShape="circle">
             <MenuItem icon={<MdDashboard />}>
-              Dashboard
+              {t("sidebar.navitem.dashboard")}
               <Link to="/admins" />
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu icon={<FaGem />} title="Features">
+            <SubMenu icon={<FaGem />} title={t("sidebar.navitem.features")}>
               <MenuItem>
-                Quản lý Users
+                {t("sidebar.navitem.manageuser")}
                 <Link to="/admins/manage-users" />
               </MenuItem>
               <MenuItem>
-                Quản lý Bài Quiz
+                {t("sidebar.navitem.managequizzes")}
                 <Link to="/admins/manage-quizzes" />
               </MenuItem>
               <MenuItem>
-                Quản lý Câu Hỏi
+                {t("sidebar.navitem.managequestions")}
                 <Link to="/admins/manage-questions" />
               </MenuItem>
             </SubMenu>
@@ -87,7 +88,7 @@ const SideBar = (props) => {
                   overflow: "hidden",
                 }}
               >
-                &#169; To home
+                &#169; {t("sidebar.backhome")}
               </span>
             </Link>
           </div>

@@ -1,4 +1,5 @@
 import {
+  FETCH_REFRESH_TOKEN,
   FETCH_USER_LOGIN_SUCCESS,
   USER_LOGOUT_SUCCESS,
 } from "../action/userAction";
@@ -29,6 +30,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         isAuthenticated: true,
       };
+    case FETCH_REFRESH_TOKEN: {
+      return {
+        ...state,
+        account: {
+          ...state.account, // Giữ lại dữ liệu cũ trong account
+          access_token: action?.payload?.DT?.access_token,
+          refresh_token: action?.payload?.DT?.refresh_token,
+        },
+      };
+    }
     case USER_LOGOUT_SUCCESS:
       return {
         ...state,

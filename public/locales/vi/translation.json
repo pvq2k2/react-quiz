@@ -1,10 +1,254 @@
 {
   "homepage": {
-    "title1": "Đảm bảo các biểu mẫu đáng để điền vào",
-    "title2": "Thu thập thêm dữ liệu như đăng ký, phản hồi và các thông tin khác với các biểu mẫu được thiết kế để khác biệt và mới mẻ",
+    "title1": "Tạo các biểu mẫu đáng để điền vào",
+    "title2": "Thu thập thêm dữ liệu như đăng ký, phản hồi và bất kỳ điều gì khác với các biểu mẫu được thiết kế khác biệt.",
     "title3": {
-      "login": "Bắt đầu ngay nó miễn phí",
+      "login": "Bắt đầu ngay, miễn phí",
       "nologin": "Làm bài kiểm tra ngay!"
     }
+  },
+  "headerhome": {
+    "navlink": {
+      "home": "Trang chủ",
+      "user": "Người dùng",
+      "admin": "Quản trị"
+    },
+    "btn": {
+      "login": "Đăng nhập",
+      "signup": "Đăng ký"
+    },
+    "navdropdow": {
+      "title": "Xin chào",
+      "profile": "Hồ sơ",
+      "logout": "Đăng xuất"
+    }
+  },
+  "notfound": {
+    "title1": "Rất tiếc! Không tìm thấy trang",
+    "title2": "Xin lỗi, trang bạn đang tìm kiếm không tồn tại. Nếu bạn nghĩ rằng có gì đó bị lỗi, hãy báo cáo sự cố.",
+    "title3": "Quay lại trang chủ"
+  },
+  "userquestion": {
+    "question": "Câu hỏi",
+    "questionimage": "Hình ảnh câu hỏi"
+  },
+  "modalresult": {
+    "title": "Kết quả của bạn...",
+    "totalquestion": "Tổng số câu hỏi:",
+    "totalcorrectanswers": "Tổng số câu trả lời đúng:",
+    "btn": {
+      "close": "Đóng",
+      "showanswer": "Xem đáp án"
+    }
+  },
+  "userlistquiz": {
+    "title": "Bài kiểm tra",
+    "btnconten": "Bắt đầu ngay",
+    "noquiz": "Bạn hiện không có bài kiểm tra nào..."
+  },
+  "userdetailquiz": {
+    "title": "Bài kiểm tra",
+    "btn": {
+      "prev": "Trước",
+      "next": "Tiếp theo",
+      "finish": "Hoàn thành"
+    }
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "btnsubmit": "Đăng nhập vào React Quizz",
+    "titlecreate": "Tạo tài khoản",
+    "gohome": "Về trang chủ"
+  },
+  "register": {
+    "title": "Đăng ký",
+    "email": "Email",
+    "username": "Tên người dùng",
+    "password": "Mật khẩu",
+    "btnsubmit": "Đăng ký vào React Quizz",
+    "titlelogin": "Tôi đã là thành viên",
+    "gohome": "Về trang chủ"
+  },
+  "admin": {
+    "navdropdow": {
+      "title": "Xin chào",
+      "profile": "Hồ sơ",
+      "logout": "Đăng xuất"
+    }
+  },
+  "sidebar": {
+    "brand": "Quản trị",
+    "navitem": {
+      "dashboard": "Bảng điều khiển",
+      "features": "Tính năng",
+      "manageuser": "Quản lý người dùng",
+      "managequizzes": "Quản lý bài kiểm tra",
+      "managequestions": "Quản lý câu hỏi"
+    },
+    "backhome": "Trở về trang chủ"
+  },
+  "dashboard": {
+    "chart": {
+      "quizzes": "Bài kiểm tra",
+      "questions": "Câu hỏi",
+      "answers": "Câu trả lời"
+    },
+    "title": "Bảng điều khiển phân tích",
+    "analytics": {
+      "totalusers": "Tổng số người dùng",
+      "totalquizzes": "Tổng số bài kiểm tra",
+      "totalquestions": "Tổng số câu hỏi",
+      "totalanswers": "Tổng số câu trả lời"
+    }
+  },
+  "manageuser": {
+    "title": "Quản lý người dùng",
+    "btn": {
+      "addnew": "Thêm người dùng mới"
+    }
+  },
+  "tableuser": {
+    "th": {
+      "username": "Tên người dùng",
+      "email": "Email",
+      "role": "Vai trò",
+      "action": "Hành động"
+    },
+    "btn": {
+      "view": "Xem",
+      "update": "Cập nhật",
+      "delete": "Xóa"
+    },
+    "nodata": "Không có người dùng",
+    "pagination": {
+      "next": "Tiếp theo",
+      "prev": "Trước"
+    }
+  },
+  "modaluser": {
+    "input": {
+      "email": "Email",
+      "password": "Mật khẩu",
+      "username": "Tên người dùng",
+      "select": {
+        "role": {
+          "label": "Vai trò",
+          "option": {
+            "user": "Người dùng",
+            "admin": "Quản trị"
+          }
+        }
+      },
+      "file": "Tải lên hình ảnh",
+      "previewimage": "Xem trước hình ảnh"
+    }
+  },
+  "createuser": {
+    "title": "Thêm người dùng mới",
+    "btn": {
+      "close": "Đóng",
+      "submit": "Lưu thay đổi"
+    }
+  },
+  "deleteuser": {
+    "title": "Xác nhận xóa người dùng",
+    "body": "Bạn có chắc chắn muốn xóa người dùng này không?",
+    "btn": {
+      "cancel": "Hủy",
+      "confirm": "Xác nhận"
+    }
+  },
+  "updateuser": {
+    "title": "Cập nhật người dùng",
+    "btn": {
+      "close": "Đóng",
+      "submit": "Lưu thay đổi"
+    }
+  },
+  "detailuser": {
+    "title": "Chi tiết người dùng",
+    "image": "Hình ảnh",
+    "btn": {
+      "close": "Đóng"
+    }
+  },
+  "managequiz": {
+    "title": "Quản lý bài kiểm tra",
+    "btn": {
+      "addquiz": "Thêm bài kiểm tra",
+      "assignquiz": "Giao bài kiểm tra"
+    }
+  },
+  "modalassignquiz": {
+    "title": "Giao bài kiểm tra cho người dùng",
+    "selectquiz": "Chọn bài kiểm tra",
+    "selectuser": "Chọn người dùng",
+    "btn": {
+      "close": "Đóng",
+      "assign": "Giao"
+    }
+  },
+  "modalquiz": {
+    "option": {
+      "easy": "Dễ",
+      "medium": "Trung bình",
+      "hard": "Khó",
+      "nodiff": "Không phân loại"
+    },
+    "title": {
+      "create": "Tạo bài kiểm tra",
+      "update": "Cập nhật bài kiểm tra",
+      "delete": "Xóa bài kiểm tra",
+      "detail": "Chi tiết bài kiểm tra"
+    },
+    "body": "Bạn có chắc chắn muốn xóa bài kiểm tra này không?",
+    "input": {
+      "quizname": "Tên bài kiểm tra",
+      "description": "Mô tả",
+      "difficultylevel": "Mức độ khó",
+      "file": "Tải lên hình ảnh",
+      "previewimage": "Xem trước hình ảnh"
+    },
+    "btn": {
+      "close": "Đóng",
+      "create": "Lưu thay đổi",
+      "update": "Cập nhật",
+      "confirm": "Xác nhận"
+    }
+  },
+  "tablequiz": {
+    "th": {
+      "name": "Tên",
+      "description": "Mô tả",
+      "difficulty": "Độ khó",
+      "action": "Hành động"
+    },
+    "nodata": "Không có bài kiểm tra",
+    "btn": {
+      "view": "Xem",
+      "update": "Cập nhật",
+      "delete": "Xóa"
+    }
+  },
+  "createupdateqa": {
+    "selectquiz": "Chọn bài kiểm tra",
+    "create": "Thêm câu hỏi mới",
+    "update": "Cập nhật câu hỏi",
+    "noquestion": "Không có câu hỏi, vui lòng tạo câu hỏi!",
+    "input": {
+      "question": "Câu hỏi",
+      "fileupload": "0 tệp đã được tải lên",
+      "answer": "Đáp án"
+    },
+    "btn": {
+      "save": "Lưu câu hỏi"
+    }
+  },
+  "managequestion": {
+    "title": "Quản lý câu hỏi",
+    "create": "Tạo",
+    "update": "Cập nhật"
   }
 }

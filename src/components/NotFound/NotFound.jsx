@@ -1,7 +1,9 @@
 import React from "react";
 import "./NotFound.scss";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const NotFound = () => {
+  const { t } = useTranslation();
   return (
     <div className="not-found-container">
       <div id="error-page">
@@ -9,13 +11,10 @@ const NotFound = () => {
           <h2 class="header" data-text="404">
             404
           </h2>
-          <h4 data-text="Opps! Page not found">Opps! Page not found</h4>
-          <p>
-            Sorry, the page you're looking for doesn't exist. If you think
-            something is broken, report a problem.
-          </p>
+          <h4 data-text="Opps! Page not found">{t("notfound.title1")}</h4>
+          <p>{t("notfound.title2")}</p>
           <div class="btns">
-            <Link to="/">return home</Link>
+            <Link to="/">{t("notfound.title3")}</Link>
           </div>
         </div>
       </div>

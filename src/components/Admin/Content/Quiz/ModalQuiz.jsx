@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,15 +11,16 @@ import {
 } from "../../../../services/apiService";
 import Select from "react-select";
 import _ from "lodash";
-const options = [
-  { value: "EASY", label: "EASY" },
-  { value: "MEDIUM", label: "MEDIUM" },
-  { value: "HARD", label: "HARD" },
-];
+import { useTranslation } from "react-i18next";
 const ModalQuiz = (props) => {
   const { show, setShow, typeModal, dataQuiz, setDataQuiz, fetchGetAllQuiz } =
     props;
-
+  const { t } = useTranslation();
+  const options = [
+    { value: "EASY", label: t("modalquiz.option.easy") },
+    { value: "MEDIUM", label: t("modalquiz.option.medium") },
+    { value: "HARD", label: t("modalquiz.option.hard") },
+  ];
   const handleClose = () => {
     setShow(false);
     setName("");
@@ -46,16 +48,16 @@ const ModalQuiz = (props) => {
   const handleSetType = (difficulty) => {
     switch (difficulty) {
       case "EASY": {
-        return { value: "EASY", label: "EASY" };
+        return { value: "EASY", label: t("modalquiz.option.easy") };
       }
       case "MEDIUM": {
-        return { value: "MEDIUM", label: "MEDIUM" };
+        return { value: "MEDIUM", label: t("modalquiz.option.medium") };
       }
       case "HARD": {
-        return { value: "HARD", label: "HARD" };
+        return { value: "HARD", label: t("modalquiz.option.hard") };
       }
       default:
-        return { value: "", label: "No difficulty" };
+        return { value: "", label: t("modalquiz.option.nodiff") };
     }
   };
 
@@ -125,19 +127,19 @@ const ModalQuiz = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>
             {typeModal === "CREATE"
-              ? "Create Quiz"
+              ? t("modalquiz.title.create")
               : typeModal === "UPDATE"
-              ? "Update Quiz"
+              ? t("modalquiz.title.update")
               : typeModal === "DELETE"
-              ? "Delete Quiz"
-              : "Detail Quiz"}
+              ? t("modalquiz.title.delete")
+              : t("modalquiz.title.detail")}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <>
             {typeModal === "DELETE" ? (
               <>
-                Are you sure delete this quiz ?
+                {t("modalquiz.body")}
                 <br /> Id:
                 <b> {dataQuiz && dataQuiz.id ? dataQuiz.id : ""}</b>
               </>
@@ -145,7 +147,7 @@ const ModalQuiz = (props) => {
               <form className="d-flex flex-column gap-3">
                 <div className="form-group">
                   <label htmlFor="quiz-name" className="form-label">
-                    Quiz name
+                    {t("modalquiz.input.quizname")}
                   </label>
                   <input
                     type="text"
@@ -158,7 +160,7 @@ const ModalQuiz = (props) => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="description" className="form-label">
-                    Description
+                    {t("modalquiz.input.description")}
                   </label>
                   <textarea
                     className="form-control"
@@ -171,12 +173,13 @@ const ModalQuiz = (props) => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="formFile" className="form-label">
-                    Difficulty level
+                    {t("modalquiz.input.difficultylevel")}
                   </label>
                   <Select
                     value={type}
                     onChange={setType}
                     options={options}
+                    placeholder=""
                     isDisabled={typeModal === "VIEW"}
                   />
                 </div>
@@ -186,11 +189,11 @@ const ModalQuiz = (props) => {
                     className="form-label label-upload"
                   >
                     {typeModal === "VIEW" ? (
-                      <>Preview Image</>
+                      <>{t("modalquiz.input.previewimage")}</>
                     ) : (
                       <>
                         <FcPlus />
-                        Upload File Image
+                        {t("modalquiz.input.file")}
                       </>
                     )}
                   </label>
@@ -207,7 +210,7 @@ const ModalQuiz = (props) => {
                   {previewImage ? (
                     <img src={previewImage} alt="img preview" />
                   ) : (
-                    <span>Preview Image</span>
+                    <span>{t("modalquiz.input.previewimage")}</span>
                   )}
                 </div>
               </form>
@@ -216,15 +219,15 @@ const ModalQuiz = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("modalquiz.btn.close")}
           </Button>
           {typeModal !== "VIEW" && (
             <Button variant="primary" onClick={() => handleSubmitQuiz()}>
               {typeModal === "CREATE"
-                ? "Save Changes"
+                ? t("modalquiz.btn.create")
                 : typeModal === "UPDATE"
-                ? "Update"
-                : "Confirm"}
+                ? t("modalquiz.btn.update")
+                : t("modalquiz.btn.confirm")}
             </Button>
           )}
         </Modal.Footer>

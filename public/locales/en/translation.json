@@ -1,10 +1,254 @@
 {
   "homepage": {
     "title1": "Make forms worth filling out",
-    "title2": "Get more data—like signups, feedback, and anything else—with forms designed to be refreshingly different.",
+    "title2": "Get more data like signups, feedback, and anything else with forms designed to be refreshingly different.",
     "title3": {
-      "login": "Get started—it's free",
+      "login": "Get started it's free",
       "nologin": "Doing Quiz Now !"
     }
+  },
+  "headerhome": {
+    "navlink": {
+      "home": "Home",
+      "user": "Users",
+      "admin": "Admin"
+    },
+    "btn": {
+      "login": "Login",
+      "signup": "Sign up"
+    },
+    "navdropdow": {
+      "title": "Hello",
+      "profile": "Profile",
+      "logout": "Logout"
+    }
+  },
+  "notfound": {
+    "title1": "Opps! Page not found",
+    "title2": "Sorry, the page you're looking for doesn't exist. If you think something is broken, report a problem.",
+    "title3": "return home"
+  },
+  "userquestion": {
+    "question": "Question",
+    "questionimage": "Question Image"
+  },
+  "modalresult": {
+    "title": "Your Result...",
+    "totalquestion": "Total Question:",
+    "totalcorrectanswers": "Total Correct Answers:",
+    "btn": {
+      "close": "Close",
+      "showanswer": "Show answers"
+    }
+  },
+  "userlistquiz": {
+    "title": "Quiz",
+    "btnconten": "Start Now",
+    "noquiz": "You don't have any quiz now..."
+  },
+  "userdetailquiz": {
+    "title": "Quiz",
+    "btn": {
+      "prev": "Prev",
+      "next": "Next",
+      "finish": "Finish"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "btnsubmit": "Login to React Quizz",
+    "titlecreate": "Create an account",
+    "gohome": "Go to homepage"
+  },
+  "register": {
+    "title": "Sign up",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "btnsubmit": "Register to React Quizz",
+    "titlelogin": "I am already member",
+    "gohome": "Go to homepage"
+  },
+  "admin": {
+    "navdropdow": {
+      "title": "Hello",
+      "profile": "Profile",
+      "logout": "Logout"
+    }
+  },
+  "sidebar": {
+    "brand": "Admin",
+    "navitem": {
+      "dashboard": "Dashboard",
+      "features": "Features",
+      "manageuser": "Manage user",
+      "managequizzes": "Manage quizzes",
+      "managequestions": "Manage questions"
+    },
+    "backhome": "Back home"
+  },
+  "dashboard": {
+    "chart": {
+      "quizzes": "Quizzes",
+      "questions": "Questions",
+      "answers": "Answers"
+    },
+    "title": "Analytics Dashboard",
+    "analytics": {
+      "totalusers": "Total Users",
+      "totalquizzes": "Total Quizzes",
+      "totalquestions": "Total Questions",
+      "totalanswers": "Total Answers"
+    }
+  },
+  "manageuser": {
+    "title": "Manage User",
+    "btn": {
+      "addnew": "Add new users"
+    }
+  },
+  "tableuser": {
+    "th": {
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "action": "Action"
+    },
+    "btn": {
+      "view": "View",
+      "update": "Update",
+      "delete": "Delete"
+    },
+    "nodata": "No user",
+    "pagination": {
+      "next": "Next",
+      "prev": "Prev"
+    }
+  },
+  "modaluser": {
+    "input": {
+      "email": "Email",
+      "password": "Password",
+      "username": "Username",
+      "select": {
+        "role": {
+          "label": "Role",
+          "option": {
+            "user": "User",
+            "admin": "Admin"
+          }
+        }
+      },
+      "file": "Upload File Image",
+      "previewimage": "Preview Image"
+    }
+  },
+  "createuser": {
+    "title": "Add new users",
+    "btn": {
+      "close": "Close",
+      "submit": "Save Changes"
+    }
+  },
+  "deleteuser": {
+    "title": "Confirm delete the user",
+    "body": "Are you sure delete this user.",
+    "btn": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "updateuser": {
+    "title": "Update a users",
+    "btn": {
+      "close": "Close",
+      "submit": "Save Changes"
+    }
+  },
+  "detailuser": {
+    "title": "Detail a users",
+    "image": "Image",
+    "btn": {
+      "close": "Close"
+    }
+  },
+  "managequiz": {
+    "title": "Manage Quizzes",
+    "btn": {
+      "addquiz": "Add Quiz",
+      "assignquiz": "Assign Quiz"
+    }
+  },
+  "modalassignquiz": {
+    "title": "Assign Quiz To User",
+    "selectquiz": "Select quiz",
+    "selectuser": "Select user",
+    "btn": {
+      "close": "Close",
+      "assign": "Assign"
+    }
+  },
+  "modalquiz": {
+    "option": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "nodiff": "No difficulty"
+    },
+    "title": {
+      "create": "Create Quiz",
+      "update": "Update Quiz",
+      "delete": "Delete Quiz",
+      "detail": "Detail Quiz"
+    },
+    "body": "Are you sure delete this quiz ?",
+    "input": {
+      "quizname": "Quiz name",
+      "description": "Description",
+      "difficultylevel": "Difficulty level",
+      "file": "Upload File Image",
+      "previewimage": "Preview Image"
+    },
+    "btn": {
+      "close": "Close",
+      "create": "Save Changes",
+      "update": "Update",
+      "confirm": "Confirm"
+    }
+  },
+  "tablequiz": {
+    "th": {
+      "name": "Name",
+      "description": "Description",
+      "difficulty": "Difficulty",
+      "action": "Action"
+    },
+    "nodata": "No quiz",
+    "btn": {
+      "view": "View",
+      "update": "Update",
+      "delete": "Delete"
+    }
+  },
+  "createupdateqa": {
+    "selectquiz": "Select Quiz",
+    "create": "Add new question",
+    "update": "Update question",
+    "noquestion": "No question, Please create question !",
+    "input": {
+      "question": "Question",
+      "fileupload": "0 file is uploaded",
+      "answer": "Answer"
+    },
+    "btn": {
+      "save": "Save Questions"
+    }
+  },
+  "managequestion": {
+    "title": "Manage Questions",
+    "create": "Create",
+    "update": "Update"
   }
 }

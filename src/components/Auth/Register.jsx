@@ -4,11 +4,13 @@ import { postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { IoPerson, IoMail, IoLockClosed } from "react-icons/io5";
 import imageForm from "../../assets/signup-image.jpg";
+import { useTranslation } from "react-i18next";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const validateEmail = (email) => {
     return String(email)
@@ -55,7 +57,7 @@ const Register = () => {
         <div className="container">
           <div className="signup-content">
             <div className="signup-form">
-              <h2 className="form-title">Sign up</h2>
+              <h2 className="form-title">{t("register.title")}</h2>
               <div className="register-form" id="register-form">
                 <div className="form-group">
                   <label htmlFor="email">
@@ -64,7 +66,7 @@ const Register = () => {
                   <input
                     type="email"
                     id="email"
-                    placeholder="Email"
+                    placeholder={t("register.email")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -76,7 +78,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="username"
-                    placeholder="User name"
+                    placeholder={t("register.username")}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -88,7 +90,7 @@ const Register = () => {
                   <input
                     type="password"
                     id="password"
-                    placeholder="Password"
+                    placeholder={t("register.password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -101,7 +103,7 @@ const Register = () => {
                     onClick={() => handleRegister()}
                     onKeyDown={(event) => handleKeyDown(event)}
                   >
-                    Register to React Quizz
+                    {t("register.btnsubmit")}
                   </button>
                 </div>
 
@@ -109,13 +111,13 @@ const Register = () => {
                   className="signup-image-link"
                   onClick={() => navigate("/login")}
                 >
-                  I am already member
+                  {t("register.titlelogin")}
                 </div>
                 <div
                   className="signup-image-link"
                   onClick={() => navigate("/")}
                 >
-                  Go to homepage
+                  {t("register.gohome")}
                 </div>
               </div>
             </div>

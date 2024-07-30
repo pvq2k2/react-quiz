@@ -8,13 +8,14 @@ import { ImSpinner10 } from "react-icons/im";
 import { IoMail, IoLockClosed } from "react-icons/io5";
 import imageForm from "../../assets/signin-image.jpg";
 import "./Login.scss";
-
+import { useTranslation } from "react-i18next";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const validateEmail = (email) => {
     return String(email)
@@ -67,7 +68,7 @@ const Login = () => {
               </figure>
             </div>
             <div className="signin-form">
-              <h2 className="form-title">Sign in</h2>
+              <h2 className="form-title">{t("login.title")}</h2>
               <div className="register-form" id="login-form">
                 <div className="form-group">
                   <label htmlFor="email">
@@ -76,7 +77,7 @@ const Login = () => {
                   <input
                     type="email"
                     id="email"
-                    placeholder="Email"
+                    placeholder={t("login.email")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -88,7 +89,7 @@ const Login = () => {
                   <input
                     type="password"
                     id="password"
-                    placeholder="Password"
+                    placeholder={t("login.password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -105,20 +106,20 @@ const Login = () => {
                     {isLoading === true && (
                       <ImSpinner10 className="loader-icon" />
                     )}
-                    <span>Login to React Quizz</span>
+                    <span>{t("login.btnsubmit")}</span>
                   </button>
                 </div>
                 <div
                   className="signup-image-link"
                   onClick={() => navigate("/register")}
                 >
-                  Create an account
+                  {t("login.titlecreate")}
                 </div>
                 <div
                   className="signup-image-link"
                   onClick={() => navigate("/")}
                 >
-                  Go to homepage
+                  {t("login.gohome")}
                 </div>
               </div>
               {/* <div className="social-login">

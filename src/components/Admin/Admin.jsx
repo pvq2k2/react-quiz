@@ -10,9 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLogout } from "../../services/apiService";
 import { logoutAction } from "../../redux/action/userAction";
 import { toast } from "react-toastify";
-
+import { useTranslation } from "react-i18next";
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
+  const { t } = useTranslation();
 
   const account = useSelector((state) => state.user.account);
   const navigate = useNavigate();
@@ -40,13 +41,15 @@ const Admin = (props) => {
           <div className="rightside">
             <Language />
             <NavDropdown
-              title={`Hello, ${account.username}`}
+              title={`${t("admin.navdropdow.title")}, ${account.username}`}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item>Profile</NavDropdown.Item>
+              <NavDropdown.Item>
+                {t("admin.navdropdow.profile")}
+              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() => handleLogOut()}>
-                Logout
+                {t("admin.navdropdow.logout")}
               </NavDropdown.Item>
             </NavDropdown>
           </div>

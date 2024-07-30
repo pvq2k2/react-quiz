@@ -8,11 +8,13 @@ import { postLogout } from "../../services/apiService";
 import { logoutAction } from "../../redux/action/userAction";
 import { toast } from "react-toastify";
 import Language from "./Language";
+import { useTranslation } from "react-i18next";
 const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleLogin = () => {
     navigate("/login");
@@ -36,25 +38,29 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/" className="nav-link">
-              Home
+              {t("headerhome.navlink.home")}
             </NavLink>
             <NavLink to="/users" className="nav-link">
-              Users
+              {t("headerhome.navlink.user")}
             </NavLink>
             <NavLink to="/admins" className="nav-link">
-              Admin
+              {t("headerhome.navlink.admin")}
             </NavLink>
           </Nav>
           <Nav>
             {isAuthenticated ? (
               <NavDropdown
-                title={`Hello, ${account.username}`}
+                title={`${t("headerhome.navdropdow.title")}, ${
+                  account.username
+                }`}
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item>
+                  {t("headerhome.navdropdow.profile")}
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleLogOut()}>
-                  Logout
+                  {t("headerhome.navdropdow.logout")}
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
@@ -63,9 +69,11 @@ const Header = () => {
                   className="btn btn-outline-dark"
                   onClick={() => handleLogin()}
                 >
-                  Login
+                  {t("headerhome.btn.login")}
                 </button>
-                <button className="btn btn-dark">Sign up</button>
+                <button className="btn btn-dark">
+                  {t("headerhome.btn.signup")}
+                </button>
               </div>
             )}
             <Language />

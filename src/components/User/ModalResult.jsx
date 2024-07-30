@@ -1,31 +1,32 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
+import { useTranslation } from "react-i18next";
 const ModalResult = (props) => {
   const { show, setShow, dataModalResult } = props;
 
   const handleClose = () => setShow(false);
-
+  const { t } = useTranslation();
   return (
     <>
       <Modal show={show} backdrop="static" onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Your Result...</Modal.Title>
+          <Modal.Title>{t("modalresult.title")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            Total Question: <b>{dataModalResult.countTotal}</b>
+            {t("modalresult.totalquestion")} <b>{dataModalResult.countTotal}</b>
           </div>
           <div>
-            Total Correct Answers: <b>{dataModalResult.countCorrect}</b>
+            {t("modalresult.totalcorrectanswers")}{" "}
+            <b>{dataModalResult.countCorrect}</b>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("modalresult.btn.close")}
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Show answers
+            {t("modalresult.btn.showanswer")}
           </Button>
         </Modal.Footer>
       </Modal>

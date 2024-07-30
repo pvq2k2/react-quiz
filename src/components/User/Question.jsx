@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import { useTranslation } from "react-i18next";
 const Question = (props) => {
   const { data, handleCheckbox, index } = props;
+  const { t } = useTranslation();
 
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   if (_.isEmpty(data)) {
@@ -24,7 +26,7 @@ const Question = (props) => {
           {isPreviewImage === true && (
             <Lightbox
               image={`data:image/jpeg;base64,${data.image}`}
-              title={`Question Image`}
+              title={t("userquestion.questionimage")}
               onClose={() => setIsPreviewImage(false)}
             />
           )}
@@ -33,7 +35,7 @@ const Question = (props) => {
         <div className="q-image"></div>
       )}
       <div className="question">
-        Question {index + 1}: {data.questionDescription} ?
+        {t("userquestion.question")} {index + 1}: {data.questionDescription} ?
       </div>
       <div className="answer">
         {data.answers &&

@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import App from "./App";
-import User from "./components/User/User";
 import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
 import ManageUser from "./components/Admin/Content/ManageUser";
@@ -15,9 +14,13 @@ import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import ManageQuestion from "./components/Admin/Content/Question/ManageQuestion";
 import PrivateRoute from "./components/Route/PrivateRoute";
+import Loading from "./components/Loading/Loading";
+import { history } from "./utils/history";
 const Router = () => {
+  history.navigate = useNavigate();
+  history.location = useLocation();
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
@@ -29,15 +32,16 @@ const Router = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/quiz/:id"
+            element={
+              <PrivateRoute>
+                <DetailQuiz />
+              </PrivateRoute>
+            }
+          />
         </Route>
-        <Route
-          path="/quiz/:id"
-          element={
-            <PrivateRoute>
-              <DetailQuiz />
-            </PrivateRoute>
-          }
-        />
+
         <Route
           path="/admins"
           element={

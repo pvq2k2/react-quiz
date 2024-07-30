@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ResponsiveContainer,
   BarChart,
@@ -11,10 +12,11 @@ import {
 import "./Dashboard.scss";
 import { useState, useEffect } from "react";
 import { getOverView } from "../../../services/apiService";
+import { useTranslation } from "react-i18next";
 const Dashboard = () => {
   const [dataOverView, setDataOverView] = useState([]);
   const [dataChart, setDataChart] = useState([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     fetchDataOverView();
   }, []);
@@ -32,15 +34,15 @@ const Dashboard = () => {
       As = res?.DT.others?.countAnswers ?? 0;
       const data = [
         {
-          name: "Quizzes",
+          name: t("dashboard.chart.quizzes"),
           Qz,
         },
         {
-          name: "Questions",
+          name: t("dashboard.chart.questions"),
           Qs,
         },
         {
-          name: "Answers",
+          name: t("dashboard.chart.answers"),
           As,
         },
       ];
@@ -49,11 +51,13 @@ const Dashboard = () => {
   };
   return (
     <div className="dashboard-container">
-      <div className="title">Analytics Dashboard</div>
+      <div className="title">{t("dashboard.title")}</div>
       <div className="content">
         <div className="c-left">
           <div className="child">
-            <span className="text-1">Total Users</span>
+            <span className="text-1">
+              {t("dashboard.analytics.totalusers")}
+            </span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.users &&
@@ -65,7 +69,9 @@ const Dashboard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Quizzes</span>
+            <span className="text-1">
+              {t("dashboard.analytics.totalquizzes")}
+            </span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&
@@ -77,7 +83,9 @@ const Dashboard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Questions</span>
+            <span className="text-1">
+              {t("dashboard.analytics.totalquestions")}
+            </span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&
@@ -89,7 +97,9 @@ const Dashboard = () => {
             </span>
           </div>
           <div className="child">
-            <span className="text-1">Total Answers</span>
+            <span className="text-1">
+              {t("dashboard.analytics.totalanswers")}
+            </span>
             <span className="text-2">
               {dataOverView &&
               dataOverView.others &&

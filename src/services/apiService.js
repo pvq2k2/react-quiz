@@ -138,6 +138,13 @@ const postCreateNewAnswerForQuestion = (
 const getOverView = () => {
   return axios.get("api/v1/overview");
 };
+
+const postRefreshToken = (email, refreshToken) => {
+  return axios.post("api/v1/refresh-token", {
+    email,
+    refresh_token: refreshToken,
+  });
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -160,4 +167,5 @@ export {
   postUpsertQA,
   postLogout,
   getOverView,
+  postRefreshToken,
 };

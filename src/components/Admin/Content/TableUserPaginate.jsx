@@ -1,5 +1,5 @@
 import ReactPaginate from "react-paginate";
-
+import { useTranslation } from "react-i18next";
 const TableUserPaginate = (props) => {
   const {
     listUser,
@@ -11,7 +11,7 @@ const TableUserPaginate = (props) => {
     currentPage,
     setCurrentPage,
   } = props;
-
+  const { t } = useTranslation();
   const handlePageClick = (event) => {
     setCurrentPage(+event.selected + 1);
     fetchGetAllUsersWithPaginate(+event.selected + 1);
@@ -23,10 +23,10 @@ const TableUserPaginate = (props) => {
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Action</th>
+            <th scope="col">{t("tableuser.th.username")}</th>
+            <th scope="col">{t("tableuser.th.email")}</th>
+            <th scope="col">{t("tableuser.th.role")}</th>
+            <th scope="col">{t("tableuser.th.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -43,19 +43,19 @@ const TableUserPaginate = (props) => {
                       className="btn btn-info"
                       onClick={() => handleClickBtnView(item)}
                     >
-                      View
+                      {t("tableuser.btn.view")}
                     </button>
                     <button
                       className="btn btn-warning mx-3"
                       onClick={() => handleClickBtnUpdate(item)}
                     >
-                      Update
+                      {t("tableuser.btn.update")}
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleClickBtnDelete(item)}
                     >
-                      Delete
+                      {t("tableuser.btn.delete")}
                     </button>
                   </td>
                 </tr>
@@ -63,19 +63,19 @@ const TableUserPaginate = (props) => {
             })
           ) : (
             <tr>
-              <td colSpan={5}>No user</td>
+              <td colSpan={5}>{t("tableuser.nodata")}</td>
             </tr>
           )}
         </tbody>
       </table>
       <div className="user-paginate d-flex justify-content-center">
         <ReactPaginate
-          nextLabel="Next >"
+          nextLabel={`${t("tableuser.pagination.next")} >`}
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={pageCount}
-          previousLabel="< Previous"
+          previousLabel={`< ${t("tableuser.pagination.prev")}`}
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"
