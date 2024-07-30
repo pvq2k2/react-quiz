@@ -9,12 +9,15 @@ import { logoutAction } from "../../redux/action/userAction";
 import { toast } from "react-toastify";
 import Language from "./Language";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import Profile from "./Profile";
 const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [isshowModalProfile, setIsShowModalProfile] = useState(false);
 
   const handleLogin = () => {
     navigate("/login");
@@ -29,58 +32,61 @@ const Header = () => {
     }
   };
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <NavLink to="/" className="navbar-brand">
-          React Quizz
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className="nav-link">
-              {t("headerhome.navlink.home")}
-            </NavLink>
-            <NavLink to="/users" className="nav-link">
-              {t("headerhome.navlink.user")}
-            </NavLink>
-            <NavLink to="/admins" className="nav-link">
-              {t("headerhome.navlink.admin")}
-            </NavLink>
-          </Nav>
-          <Nav>
-            {isAuthenticated ? (
-              <NavDropdown
-                title={`${t("headerhome.navdropdow.title")}, ${
-                  account.username
-                }`}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item>
-                  {t("headerhome.navdropdow.profile")}
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => handleLogOut()}>
-                  {t("headerhome.navdropdow.logout")}
-                </NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <div className="d-flex gap-3">
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={() => handleLogin()}
+    <>
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <NavLink to="/" className="navbar-brand">
+            React Quizz
+          </NavLink>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink to="/" className="nav-link">
+                {t("headerhome.navlink.home")}
+              </NavLink>
+              <NavLink to="/users" className="nav-link">
+                {t("headerhome.navlink.user")}
+              </NavLink>
+              <NavLink to="/admins" className="nav-link">
+                {t("headerhome.navlink.admin")}
+              </NavLink>
+            </Nav>
+            <Nav>
+              {isAuthenticated ? (
+                <NavDropdown
+                  title={`${t("headerhome.navdropdow.title")}, ${
+                    account.username
+                  }`}
+                  id="basic-nav-dropdown"
                 >
-                  {t("headerhome.btn.login")}
-                </button>
-                <button className="btn btn-dark">
-                  {t("headerhome.btn.signup")}
-                </button>
-              </div>
-            )}
-            <Language />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+                  <NavDropdown.Item onClick={() => setIsShowModalProfile(true)}>
+                    {t("headerhome.navdropdow.profile")}
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={() => handleLogOut()}>
+                    {t("headerhome.navdropdow.logout")}
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <div className="d-flex gap-3">
+                  <button
+                    className="btn btn-outline-dark"
+                    onClick={() => handleLogin()}
+                  >
+                    {t("headerhome.btn.login")}
+                  </button>
+                  <button className="btn btn-dark">
+                    {t("headerhome.btn.signup")}
+                  </button>
+                </div>
+              )}
+              <Language />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Profile show={isshowModalProfile} setShow={setIsShowModalProfile} />
+    </>
   );
 };
 

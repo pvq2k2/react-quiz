@@ -23,6 +23,12 @@
       "logout": "Đăng xuất"
     }
   },
+  "profile": {
+    "title": "Hồ sơ",
+    "maininfor": "Thông tin chính",
+    "changepassword": "Đổi mật khẩu",
+    "history": "Lịch sử"
+  },
   "notfound": {
     "title1": "Rất tiếc! Không tìm thấy trang",
     "title2": "Xin lỗi, trang bạn đang tìm kiếm không tồn tại. Nếu bạn nghĩ rằng có gì đó bị lỗi, hãy báo cáo sự cố.",

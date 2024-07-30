@@ -23,6 +23,12 @@
       "logout": "Logout"
     }
   },
+  "profile": {
+    "title": "Profile",
+    "maininfor": "Main information",
+    "changepassword": "Change Password",
+    "history": "History"
+  },
   "notfound": {
     "title1": "Opps! Page not found",
     "title2": "Sorry, the page you're looking for doesn't exist. If you think something is broken, report a problem.",
