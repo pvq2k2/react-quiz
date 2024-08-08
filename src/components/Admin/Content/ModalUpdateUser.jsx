@@ -63,8 +63,7 @@ const ModalUpdateUser = (props) => {
       handleClose();
       // await fetchGetAllUsers();
       await fetchGetAllUsersWithPaginate(currentPage);
-    }
-    if (data && data.EC !== 0) {
+    } else {
       toast.error(data.EM);
     }
   };

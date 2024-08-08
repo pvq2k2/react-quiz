@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from "react";
 
 const CountDown = (props) => {
-  const { onTimeUp } = props;
-  const [count, setCount] = useState(500);
+  const { onTimeUp, isSubmitQuiz } = props;
+  const [count, setCount] = useState(600);
 
   useEffect(() => {
+    if (isSubmitQuiz) {
+      return;
+    }
     if (count === 0) {
       onTimeUp();
       return;

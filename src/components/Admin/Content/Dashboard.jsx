@@ -13,6 +13,7 @@ import "./Dashboard.scss";
 import { useState, useEffect } from "react";
 import { getOverView } from "../../../services/apiService";
 import { useTranslation } from "react-i18next";
+import _ from "lodash";
 const Dashboard = () => {
   const [dataOverView, setDataOverView] = useState([]);
   const [dataChart, setDataChart] = useState([]);
@@ -20,6 +21,26 @@ const Dashboard = () => {
   useEffect(() => {
     fetchDataOverView();
   }, []);
+
+  useEffect(() => {
+    if (!_.isEmpty(dataChart)) {
+      const data = [
+        {
+          name: t("dashboard.chart.quizzes"),
+          Qz: dataChart[0].Qz,
+        },
+        {
+          name: t("dashboard.chart.questions"),
+          Qs: dataChart[1].Qs,
+        },
+        {
+          name: t("dashboard.chart.answers"),
+          As: dataChart[2].As,
+        },
+      ];
+      setDataChart(data);
+    }
+  }, [t]);
 
   const fetchDataOverView = async () => {
     let res = await getOverView();

@@ -11,8 +11,10 @@ import { postLogout } from "../../services/apiService";
 import { logoutAction } from "../../redux/action/userAction";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import Profile from "../Header/Profile";
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [isshowModalProfile, setIsShowModalProfile] = useState(false);
   const { t } = useTranslation();
 
   const account = useSelector((state) => state.user.account);
@@ -44,7 +46,7 @@ const Admin = (props) => {
               title={`${t("admin.navdropdow.title")}, ${account.username}`}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item>
+              <NavDropdown.Item onClick={() => setIsShowModalProfile(true)}>
                 {t("admin.navdropdow.profile")}
               </NavDropdown.Item>
               <NavDropdown.Divider />
@@ -60,6 +62,8 @@ const Admin = (props) => {
           </PerfectScrollbar>
         </div>
       </div>
+
+      <Profile show={isshowModalProfile} setShow={setIsShowModalProfile} />
     </div>
   );
 };

@@ -57,6 +57,31 @@ const postLogout = (email, refresh_token) => {
   });
 };
 
+const postRefreshToken = (email, refreshToken) => {
+  return axios.post("api/v1/refresh-token", {
+    email,
+    refresh_token: refreshToken,
+  });
+};
+
+const postProfile = (username, userImage) => {
+  return axios.post("api/v1/profile", {
+    username,
+    userImage,
+  });
+};
+
+const postChangePassword = (current_password, new_password) => {
+  return axios.post("api/v1/change-password", {
+    current_password,
+    new_password,
+  });
+};
+
+const getHistory = () => {
+  return axios.get("api/v1/history");
+};
+
 // Quiz
 const getQuizByUser = () => {
   return axios.get("api/v1/quiz-by-participant");
@@ -119,7 +144,7 @@ const postCreateNewQuestionForQuiz = (quiz_id, description, image) => {
 
 // Answer
 const postSubmitQuiz = (data) => {
-  return axios.post("z-submit", { ...data });
+  return axios.post("api/v1/quiz-submit", { ...data });
 };
 
 const postCreateNewAnswerForQuestion = (
@@ -139,12 +164,6 @@ const getOverView = () => {
   return axios.get("api/v1/overview");
 };
 
-const postRefreshToken = (email, refreshToken) => {
-  return axios.post("api/v1/refresh-token", {
-    email,
-    refresh_token: refreshToken,
-  });
-};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -168,4 +187,7 @@ export {
   postLogout,
   getOverView,
   postRefreshToken,
+  postProfile,
+  postChangePassword,
+  getHistory,
 };

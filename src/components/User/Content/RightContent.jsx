@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import CountDown from "./CountDown";
 
 const RightContent = (props) => {
-  const { dataQuiz, handleFinishQuiz, setIndex } = props;
+  const { dataQuiz, handleFinishQuiz, setIndex, isSubmitQuiz } = props;
   const refDiv = useRef([]);
 
   const onTimeUp = () => {
@@ -40,7 +40,7 @@ const RightContent = (props) => {
   return (
     <>
       <div className="main-timer">
-        <CountDown onTimeUp={onTimeUp} />
+        <CountDown onTimeUp={onTimeUp} isSubmitQuiz={isSubmitQuiz} />
       </div>
       <div className="main-question">
         {dataQuiz &&

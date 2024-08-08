@@ -18,12 +18,16 @@ const DetailQuiz = () => {
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
 
+  const [isSubmitQuiz, setIsSubmitQuiz] = useState(false);
+  const [isShowAnswer, setIsShowAnswer] = useState(false);
+
   const [isShowModalResult, setIsShowModalResult] = useState(false);
   const [dataModalResult, setDataModalResult] = useState({});
 
   useEffect(() => {
     fetchQuestions();
   }, [quizId]);
+
   const fetchQuestions = async () => {
     const res = await getDataQuiz(quizId);
     if (res && res.EC === 0) {
@@ -40,6 +44,7 @@ const DetailQuiz = () => {
               image = item.image;
             }
             item.answers.isSelected = false;
+            item.answers.isCorrect = false;
             answers.push(item.answers);
           });
           answers = _.orderBy(answers, ["id"], ["asc"]);
@@ -106,16 +111,45 @@ const DetailQuiz = () => {
       payload.answers = answers;
       let res = await postSubmitQuiz(payload);
       if (res && res.EC === 0) {
+        setIsSubmitQuiz(true);
         setDataModalResult({
           countCorrect: res.DT.countCorrect,
           countTotal: res.DT.countTotal,
           quizData: res.DT.quizData,
         });
         setIsShowModalResult(true);
+        //update DataQuiz with correct answer
+        if (res.DT && res.DT.quizData) {
+          let dataQuizClone = _.cloneDeep(dataQuiz);
+          let a = res.DT.quizData;
+          for (let q of a) {
+            for (let i = 0; i < dataQuizClone.length; i++) {
+              if (+q.questionId === +dataQuizClone[i].questionId) {
+                //update answer
+                let newAnswers = [];
+                for (let j = 0; j < dataQuizClone[i].answers.length; j++) {
+                  let s = q.systemAnswers.find(
+                    (item) => +item.id === +dataQuizClone[i].answers[j].id
+                  );
+                  if (s) {
+                    dataQuizClone[i].answers[j].isCorrect = true;
+                  }
+                  newAnswers.push(dataQuizClone[i].answers[j]);
+                }
+                dataQuizClone[i].answers = newAnswers;
+              }
+            }
+          }
+          setDataQuiz(dataQuizClone);
+        }
       } else {
         toast.error(res.EM);
       }
     }
+  };
+  const handleShowAnswer = () => {
+    if (!isSubmitQuiz) return;
+    setIsShowAnswer(true);
   };
   return (
     <div className="detail-quiz-container">
@@ -131,6 +165,7 @@ const DetailQuiz = () => {
           <Question
             index={index}
             handleCheckbox={handleCheckbox}
+            isShowAnswer={isShowAnswer}
             data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
           />
         </div>
@@ -142,6 +177,7 @@ const DetailQuiz = () => {
             {t("userdetailquiz.btn.next")}
           </button>
           <button
+            disabled={isSubmitQuiz}
             className="btn btn-warning"
             onClick={() => handleFinishQuiz()}
           >
@@ -154,12 +190,14 @@ const DetailQuiz = () => {
           dataQuiz={dataQuiz}
           handleFinishQuiz={handleFinishQuiz}
           setIndex={setIndex}
+          isSubmitQuiz={isSubmitQuiz}
         />
       </div>
       <ModalResult
         show={isShowModalResult}
         setShow={setIsShowModalResult}
         dataModalResult={dataModalResult}
+        handleShowAnswer={handleShowAnswer}
       />
     </div>
   );

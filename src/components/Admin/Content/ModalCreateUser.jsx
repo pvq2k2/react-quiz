@@ -58,8 +58,7 @@ const ModalCreateUser = (props) => {
       // await fetchGetAllUsers();
       setCurrentPage(1);
       await fetchGetAllUsersWithPaginate(1);
-    }
-    if (data && data.EC !== 0) {
+    } else {
       toast.error(data.EM);
     }
   };

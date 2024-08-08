@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useTranslation } from "react-i18next";
 const ModalResult = (props) => {
-  const { show, setShow, dataModalResult } = props;
+  const { show, setShow, dataModalResult, handleShowAnswer } = props;
 
   const handleClose = () => setShow(false);
   const { t } = useTranslation();
@@ -25,7 +25,13 @@ const ModalResult = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             {t("modalresult.btn.close")}
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleClose();
+              handleShowAnswer();
+            }}
+          >
             {t("modalresult.btn.showanswer")}
           </Button>
         </Modal.Footer>

@@ -256,5 +256,19 @@
     "title": "Quản lý câu hỏi",
     "create": "Tạo",
     "update": "Cập nhật"
+  },
+  "changepassword": {
+    "currentpassword": "Mật khẩu hiện tại",
+    "newpassword": "Mật khẩu mới",
+    "confirmpassword": "Xác nhận mật khẩu"
+  },
+  "history": {
+    "th": {
+      "name": "Tên bài kiểm tra",
+      "totalquestion": "Tổng số câu hỏi",
+      "totalcorrect": "Tổng số câu trả lời đúng",
+      "date": "Thời gian"
+    },
+    "nodata": "Không có lịch sử"
   }
 }

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
 import { useTranslation } from "react-i18next";
+import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 const Question = (props) => {
-  const { data, handleCheckbox, index } = props;
+  const { data, handleCheckbox, index, isShowAnswer } = props;
   const { t } = useTranslation();
 
   const [isPreviewImage, setIsPreviewImage] = useState(false);
@@ -14,6 +15,8 @@ const Question = (props) => {
   const handleChangeAnswer = (e, aId, qId) => {
     handleCheckbox(aId, qId);
   };
+  console.log(data);
+
   return (
     <>
       {data.image ? (
@@ -47,6 +50,7 @@ const Question = (props) => {
                   <input
                     className="form-check-input"
                     type="checkbox"
+                    disabled={isShowAnswer}
                     checked={a.isSelected}
                     onChange={(e) =>
                       handleChangeAnswer(e, a.id, data.questionId)
@@ -59,6 +63,17 @@ const Question = (props) => {
                   >
                     {a.description}
                   </label>
+                  {isShowAnswer === true && (
+                    <>
+                      {a.isSelected === true && a.isCorrect === false && (
+                        <IoIosClose className="incorrect" />
+                      )}
+
+                      {a.isCorrect === true && (
+                        <IoIosCheckmark className="correct" />
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             );

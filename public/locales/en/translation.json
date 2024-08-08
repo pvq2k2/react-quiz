@@ -256,5 +256,19 @@
     "title": "Manage Questions",
     "create": "Create",
     "update": "Update"
+  },
+  "changepassword": {
+    "currentpassword": "Current password",
+    "newpassword": "New password",
+    "confirmpassword": "Confirm password"
+  },
+  "history": {
+    "th": {
+      "name": "Quiz Name",
+      "totalquestion": "Total Question",
+      "totalcorrect": "Total Correct",
+      "date": "Date"
+    },
+    "nodata": "No history"
   }
 }

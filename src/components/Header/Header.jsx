@@ -19,9 +19,6 @@ const Header = () => {
   const { t } = useTranslation();
   const [isshowModalProfile, setIsShowModalProfile] = useState(false);
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
   const handleLogOut = async () => {
     let res = await postLogout(account.email, account.refresh_token);
     if (res && res.EC === 0) {
@@ -71,11 +68,14 @@ const Header = () => {
                 <div className="d-flex gap-3">
                   <button
                     className="btn btn-outline-dark"
-                    onClick={() => handleLogin()}
+                    onClick={() => navigate("/login")}
                   >
                     {t("headerhome.btn.login")}
                   </button>
-                  <button className="btn btn-dark">
+                  <button
+                    className="btn btn-dark"
+                    onClick={() => navigate("/register")}
+                  >
                     {t("headerhome.btn.signup")}
                   </button>
                 </div>
